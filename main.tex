@@ -1,0 +1,187 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[pdftex]{color,graphicx}
+\usepackage{assets/include/elaboration}
+%% debug  \overfullrule=2cm
+\mywork{Group Project}{2025-2026}{Project 2: Kingdom Communication Solutions (KCS) Media Studio - Web-Based AI Video Transcription and Multilingual Caption Editing}
+
+\mydate{19.03.2026}
+\author{IUSJ Engineering Group}
+
+%% PDF
+\usepackage[hypertexnames=false, colorlinks=true, allcolors=black, pdftex,
+            pdfauthor={IUSJ Engineering Group},
+            pdftitle={\MyThema},
+            pdfsubject={Scientific Document}]{hyperref}
+
+\begin{document}
+\mytitle
+
+\newpage
+
+\section*{Abstract}
+This paper establishes the framework for \textbf{Kingdom Communication Solutions (KCS) Media Studio}, a web-based platform for AI-assisted video transcription and multilingual caption editing. Focusing on three low-resource Cameroonian languages (Gh\textopeno m\'al\'a', Ewondo, and Basaa), it addresses critical infrastructure gaps in automated speech recognition (ASR). We detail a rigorous data-collection methodology utilizing KoboToolbox, ethical consent protocols, and an independent double-validation framework. Furthermore, we define a strict eight-parameter audio file-naming convention for ASR training. The project yields three primary deliverables: a technological platform, a validated linguistic corpus, and a standardized methodological framework for indigenous language preservation.
+
+\vspace{1em}
+\noindent\textbf{Keywords:} \textit{AI Transcription, Multilingual Captioning, Low-Resource Languages, Cameroonian Languages, Kingdom Communication Solutions (KCS) Media Studio, Automatic Speech Recognition, Data Validation}
+
+\newpage
+
+%% Table of content
+...
+\frontmatter
+
+%% generated automatically from the table of content 
+\tableofcontents
+
+
+\mainmatter
+
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{Motivation}
+\label{sec:intro:motivation}
+
+Linguistic diversity is frequently framed as a purely cultural asset, yet in the digital sphere, it often operates as an exclusion mechanism. Cameroon exemplifies this paradox: a Central African nation home to over 280 distinct languages spanning three major African language families, including Niger-Congo, Nilo-Saharan, and Afroasiatic~\cite{eberhard2021ethnologue}. Despite this immense sociolinguistic wealth, the vast majority of these indigenous tongues are categorized as low-resource within computational linguistics. Global automatic speech recognition systems, automated transcription workflows, and digital media localization suites are predominantly built for high-resource, Indo-European languages. Consequently, indigenous Cameroonian communities find themselves entirely unserved by contemporary artificial intelligence infrastructure~\cite{joshi2020state, imam2025automatic}.
+
+Among these vernaculars, Gh\textopeno m\'al\'a' (a major Eastern Grassfields Bamileke language spoken widely across the West Region), Ewondo (a prominent Beti-Pahuin Bantu language functioning as a primary lingua franca in the Centre and South Regions), and Basaa (a vital Narrow Bantu language of the A40 zone spoken in the Littoral and Centre Regions) hold deep historical and cultural weight~\cite{lewis2009ethnologue}. Today, these targeted languages contend with heavy pressure from digital globalization and the dominance of high-resource languages in computational linguistics~\cite{mfonyam1994tone}. While local radio networks and community associations have long worked to sustain these languages, modern digital formats, such as video archives, digital learning modules, and online broadcasting, require automated technical pipelines that currently do not exist for these idioms.
+
+\subsection{Problem Statement}
+\label{sec:intro:problem}
+
+The technical barrier blocking the digital integration of Gh\textopeno m\'al\'a', Ewondo, and Basaa is twofold. First, there is a distinct lack of standardized digital corpora, phonological dictionaries, and transcribed speech datasets needed to train acoustic and language models~\cite{hedren2022challenges}. Second, standard video transcription and subtitle-editing interfaces assume linear, highly resourced orthographies, breaking down entirely when handling the tonal variations, noun classes, and complex diacritics native to Cameroonian languages. 
+
+Creators, educators, and archivists attempting to publish localized video content are thus forced into tedious, manual workflows. While recent advances in self-supervised multilingual speech architectures (such as wav2vec 2.0, XLS-R, and Massively Multilingual Speech models) offer paths for cross-lingual transfer, they stall without rigorous, localized data validation~\cite{pratap2024scaling, nahabwe2026benchmarking}. Furthermore, existing media environments fail to accommodate micro-variations in regional accents, slang, or village-level dialectal nuances, causing friction among users from different tribes or communities speaking the same base language.
+
+\subsection{Research Questions}
+\label{sec:intro:rq}
+
+To address the outlined technical and sociolinguistic barriers, this research investigates two primary questions:
+
+\paragraph{\textbf{RQ1:}} \textit{How can the editing environment accommodate variations in regional accents or slang without alienating users from different villages or tribes who speak the same base language?}
+
+In Cameroonian languages such as Gh\textopeno m\'al\'a', Ewondo, and Basaa, noticeable phonological and lexical variations exist between neighboring villages and sub-regions. When digital tools enforce a single rigid orthographic standard, speakers of regional variants often find generated captions unfamiliar or culturally distant. This question focuses on designing an adaptive editing interface that supports flexible vocabulary suggestions, localized glossaries, and community-driven terminology options, enabling creators to adapt captions to regional speech without fragmenting the underlying language model.
+
+\paragraph{\textbf{RQ2:}} \textit{How can we build a multilingual speech transcription tool where people can edit videos, and make sure our list of written words and voice recordings for local Cameroonian languages work smoothly inside it?}
+
+Standard web-based video editors assume linear text and high-resource audio aligned with pre-existing recognition engines. Integrating low-resource African speech into an active editing environment requires coupling custom voice recordings and specialized lexicons directly with the front-end timeline. This question addresses the web architecture required to ingest raw native-speaker audio samples, parse localized word lists, and synchronize them cleanly with video tracks in a responsive browser application.
+
+
+\section{Methodology}
+\label{sec:methodology}
+
+Developing speech recognition and captioning tools for low-resource languages requires a multi-faceted approach. This section details our dialect selection strategy and the strict field-based protocols we employ to build reliable datasets.
+
+\subsection{Dialect Selection}
+\label{sec:variants}
+
+Treating a language as a single uniform entity can lead to high acoustic variability and poor transcription accuracy. Below, we outline the regional dialects for our three target languages, identify the specific variants chosen for the \textbf{Kingdom Communication Solutions (KCS) Media Studio}, and explain the reasoning behind these choices.
+
+\subsubsection{Ewondo}
+
+Ewondo, part of the Beti-Pahuin group in the Centre Region, features several regional variations. The dominant urban dialect is Ewondo Yaound\'e, spoken primarily in the capital and characterized by French lexical borrowings~\cite{redden2018ewondo}. Further south, along the Nyong river, the Mbalmayo variant exhibits distinct vowel lowering~\cite{essono2010ewondo}. In the northern periphery, the Mvele and Yezum dialects display unique tonal contours~\cite{ngoh2019dialectal}, while the eastern forest margins are home to the Bane and Yabekolo transitional dialects~\cite{abega2012langues}.
+
+For this project, we selected \textbf{Ewondo Yaound\'e} as our standard variant. It is widely accepted across regional media and education, making it the most stable choice. Additionally, it has the largest amount of documented text, which helps reduce vocabulary errors when training acoustic models.
+
+\subsubsection{Gh\textopeno m\'al\'a'}
+
+Gh\textopeno m\'al\'a' is a major Eastern Grassfields language spoken in the West Region. Its central variety is the Bandjoun (Jo) dialect, which holds historical prestige~\cite{mfonyam1994tone}. The Bafoussam (Fusap) variant serves as the commercial hub dialect, known for rapid speech and word elision~\cite{kamga2021phonetic}. The western and southern areas feature the Baham (Hom) and Bati\'e (Te') varieties, with distinct vowel shifts~\cite{hyman2003western}, while highland dialects like Bamougoum (M\^ugum) and Bansoa (Ssa') retain older consonant structures~\cite{watters2007bamileke}.
+
+We have chosen the \textbf{Bandjoun} dialect for the platform. As the foundational standard for written Gh\textopeno m\'al\'a', it is well-supported by existing dictionaries and literacy materials, ensuring that our transcriptions align with established written norms.
+
+\subsubsection{Basaa}
+
+Basaa is a Narrow Bantu language spoken across the Littoral and Centre Regions. Its main dialect is Basaa Central (Nyangon), which connects the Sanaga-Maritime and Nyong-et-K\'ell\'e divisions~\cite{njiki2015grammaire}. Other variations include the Bakem and Bon transitional dialects in the north and west~\cite{bitjaa2017dialectologie}, the Bassa de Babimbi forest cluster along the Sanaga river~\cite{guarisma2003basaa}, and the southern coastal dialects (Log and Mpo) that show noun-class simplification~\cite{mbassi2011bantu}.
+
+We selected \textbf{Basaa Central} because it offers the highest lexical consistency with major dictionaries, such as the \textit{Dico Bassa'a}. Its balanced phonology also helps minimize transcription conflicts when collecting audio from different speakers.
+
+\subsection{Data Collection Methodology}
+\label{sec:datacollection}
+
+Building a reliable corpus for the KCS Media Studio requires more than just gathering audio; it demands rigorous validation to prevent speech recognition failures caused by literal or unverified translations. To achieve this, we use a hybrid data collection model that combines active community fieldwork with structured remote verification~\cite{simons2020building}. 
+
+Our collection workflow is broken into two parallel phases:
+
+\paragraph{Textual Translation and Verification}
+Initial drafts are translated by fluent native speakers. We instruct translators to prioritize contextual meaning and natural idiomatic phrasing rather than providing rigid, word-for-word literal translations. Once drafted, these texts are systematically cross-referenced against established lexical databases, standardized orthographies, and published dictionaries to ensure consistency.
+
+\paragraph{Field Audio Capture}
+Native audio recordings are gathered directly within the respective linguistic regions. Fieldworkers use mobile recording equipment synchronized with custom KoboToolbox digital forms~\cite{kobotoolbox2024}. This digital tooling allows us to standardize metadata entry, track contributor consent, and ensure precise text-to-audio alignment directly at the point of recording.
+
+\subsection{Consent and Validation Procedure}
+\label{sec:consent}
+
+Ethical compliance and rigorous quality control form the foundation of our corpus development pipeline. This ensures that every linguistic contribution is authorized, ethically gathered, and linguistically sound before entering the system repository.
+
+\paragraph{Informed Consent Protocol}
+Prior to any audio recording or text transcription, field teams secure documented informed consent from all participating native speakers. Utilizing standardized digital modules integrated into our KoboToolbox workflows, participants are fully briefed on the project scope, the digital archiving of their speech data, and its intended use within the KCS Media Studio platform. Contributors retain full autonomy, including the explicit right to withdraw their data at any stage of the research process without penalty~\cite{grenoble2010language}. This protocol aligns with international standards for community-based linguistic fieldwork, ensuring that indigenous speakers maintain ownership and control over their oral heritage.
+
+\paragraph{Independent Double-Validation Framework}
+To ensure high semantic fidelity and orthographic consistency across Gh\textopeno m\'al\'a', Ewondo, and Basaa, raw submissions bypass direct repository ingestion. Instead, every translated text segment and corresponding audio file enters a mandatory, multi-tiered validation loop. First, a \textbf{Primary Review} conducts an initial technical audit, checking for basic audio clarity, signal-to-noise ratios, and structural timestamp alignment against the source video file. Following this, an \textbf{Independent Secondary Audit} is performed by a second native speaker, who evaluates the submission for contextual accuracy, idiomatic phrasing, and phonetic correctness by cross-referencing against online dictionaries and lexical documents~\cite{bird2014coscab}. In instances of lexical divergence or dialectal ambiguity, a \textbf{Dispute Resolution} phase is triggered, where a senior linguistic supervisor intervenes to adjudicate the correct orthographic representation. Finally, the \textbf{Commitment Stage} ensures that the dataset is only committed to the project pipeline after receiving formal approval and error correction from both validators.
+
+\subsection{Audio File Naming Convention and Corpus Architecture}
+\label{sec:naming}
+
+To ensure systematic indexing, strict traceability, and seamless ingestion into automated speech recognition (ASR) pipelines, raw audio recordings gathered during fieldwork must adhere to a robust, standardized naming convention. Relying on simplistic filenames prevents proper dataset auditing, obscures critical acoustic parameters, and hinders debugging when speech-to-text models encounter training anomalies.
+
+We implement a comprehensive, hierarchical nomenclature designed to encode eight core metadata parameters directly into every \texttt{.wav} file:
+
+\vspace{0.5em}
+\begin{center}
+\texttt{ISO-Lang\_Variant\_Demographics\_Content\_Environment\_Location\_Timestamp\_ConceptID.wav}
+\end{center}
+\vspace{0.5em}
+
+\subsubsection*{Structural Breakdown of the Naming Parameters}
+
+\begin{description}
+    \item[ISO-Lang (ISO 639-3 Language Identifier):] A standardized three-letter code designating the target language (\texttt{ewo} for Ewondo, \texttt{bbj} for Gh\textopeno m\'al\'a', \texttt{bas} for Basaa).
+    \item[Variant (Regional Dialect Code):] A concise descriptor identifying the specific dialectal standard (\texttt{yao} for Ewondo Yaound\'e, \texttt{bdj} for Bandjoun, \texttt{ctr} for Basaa Central).
+    \item[Demographics (Age Group and Sex):] An anonymized demographic token capturing the speaker's categorical age bracket and biological sex. Sex is recorded as \texttt{M} (Male) or \texttt{F} (Female), paired with standardized generational age tiers (\texttt{YTH} for youth aged 18--29, \texttt{ADL} for adults aged 30--54, and \texttt{SRV} for seniors aged 55 and above). For example, \texttt{ADL-F} represents an adult female.
+    \item[Content (Lexical or Discourse Type):] A categorical tag classifying the nature of the utterance. Because collection relies primarily on speakers reading from our predefined standardized list of 363 words, this is marked as \texttt{LEX} for structured word-list items, or extended to \texttt{NAR} for narrative passages if applicable.
+    \item[Environment (Acoustic Condition):] A code indicating the recording setting to assist preprocessing algorithms in filtering out background noise (\texttt{STU} for controlled studio conditions, \texttt{QUI} for a quiet indoor room, or \texttt{FLD} for ambient field settings).
+    \item[Location (Recording Origin):] A three-letter geographic code indicating where the session took place (e.g., \texttt{YAO} for Yaound\'e, \texttt{DLA} for Douala, \texttt{BFN} for Bafoussam).
+    \item[Timestamp (Acquisition Date):] The exact date of capture formatted strictly as \texttt{YYYYMMDD} to maintain chronological version control.
+    \item[ConceptID (Lexicon Index):] The exact sequential identifier corresponding to our predefined reading list of 363 words (ranging from \texttt{ASD-0001} to \texttt{ASD-0363}), ensuring a direct mapping between the audio file and its target textual definition.
+\end{description}
+
+\subsubsection*{Practical Application Example}
+
+Consider an audio recording captured on September 11, 2026, in Yaound\'e, where an adult male speaker reads the first word from our standardized 363-word lexicon under quiet indoor conditions. The resulting file is named as follows:
+
+\vspace{0.5em}
+\begin{center}
+\texttt{ewo\_yao\_ADL-M\_LEX\_QUI\_YAO\_20260911\_ASD-0001.wav}
+\end{center}
+\vspace{0.5em}
+
+This granular file-naming architecture eliminates naming collisions, embeds vital sociolinguistic and environmental metadata directly into the file system, and provides automated ingestion pipelines with the precise parameters required to structure balanced training batches.
+
+\section{Expected Artefacts}
+\label{sec:artefacts}
+
+This project generates three primary categories of deliverables. While the web platform provides the technical infrastructure, the language datasets and collection protocols represent independent, highly valuable contributions to the study of low-resource African languages.
+
+\subsection{The Technological Artefact}
+The core software deliverable is the \textbf{Kingdom Communication Solutions (KCS) Media Studio}. This web-based platform provides AI-assisted transcription and caption editing for Gh\textopeno m\'al\'a', Ewondo, and Basaa. Unlike standard video editors, this tool is specifically engineered to handle the complex orthographies, tonal markers, and localized translation needs of these languages. It features a media management interface for timeline synchronization, a backend processing engine connected to specialized speech recognition models, and a split-screen workspace where native speakers can validate translations.
+
+\subsection{The Linguistic Data Artefact}
+A major outcome of this work is the creation of standardized, validated digital corpora for the three target languages. Because there is a severe shortage of structured text and audio data for these regional dialects, the resulting datasets, which comprise phonological dictionaries, transcribed speech, and native-speaker audio recordings, serve as foundational resources. These corpora can be used independently to train future acoustic models, language models, and text-to-speech architectures.
+
+\subsection{The Methodological Artefact}
+The final deliverable is the formal data collection and validation protocol itself. We implement a strict, community-driven framework that mandates contextualized translation, documented informed consent, direct native-speaker audio capture, and an independent double-validation process. This methodology offers a documented, reusable blueprint for future research teams attempting to digitize and preserve other targeted low-resource languages.
+
+\section{Conclusion}
+\label{sec:conclusion}
+The severe lack of acoustic and linguistic datasets for indigenous Cameroonian languages presents a critical barrier to their integration into modern systems. Through the development of the Kingdom Communication Solutions (KCS) Media Studio, this project establishes a foundational technical and methodological framework for integrating Gh\textopeno m\'al\'a', Ewondo, and Basaa into modern AI transcription pipelines. By coupling a robust web-based application with rigorous, field-validated data collection protocols and strict socio-linguistic structuring, we aim to bridge the computational gap for low-resource tonal languages. The resulting technological platform, alongside the newly structured speech corpora, serves as an essential stepping stone toward equitable automated speech recognition for African linguistic heritage.
+
+\newpage
+
+%% To mark the beginning of the appendix
+\appendix
+
+% \section{References}
+\printbibliography[heading=bibintoc]
+
+
+\end{document}

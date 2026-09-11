@@ -1,0 +1,211 @@
+\ProvidesPackage{assets/include/elaboration}
+
+%encoding
+%--------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+%--------------------------------------
+
+%German-specific commands
+%--------------------------------------
+\usepackage[english]{babel}
+%--------------------------------------
+
+%Hyphenation rules
+%--------------------------------------
+\usepackage{hyphenat}
+%--------------------------------------
+\selectlanguage{english}
+
+\usepackage[pdftex]{color,graphicx}
+
+\usepackage{titleps}
+\usepackage{tipa}
+\DeclareUnicodeCharacter{0254}{\textopeno}
+\DeclareUnicodeCharacter{0259}{\textschwa}
+\DeclareUnicodeCharacter{0181}{\textbf{B}}
+\DeclareUnicodeCharacter{0300}{\`}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{ifthen}
+\usepackage{float}
+\usepackage{verbatim}
+\usepackage[final]{microtype}
+\setlength{\emergencystretch}{3em}
+% debug \usepackage{showframe}
+% \usepackage[bottom]{footmisc}
+\usepackage[a4paper, top=1.9cm, bottom=4.3cm, left=1.3cm, right=1.3cm, columnsep=0.63cm]{geometry}
+\setlength{\marginparwidth}{2cm}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{tabulary}
+\usepackage{caption}
+
+% Better listings: minted
+%\usepackage[newfloat]{minted}
+\usepackage{minted}
+\usepackage{xcolor}
+
+\setminted{
+    fontsize=\scriptsize,
+    tabsize=2,
+    breaklines,
+    linenos,
+    frame=single
+}
+
+\usemintedstyle{tango}
+%\renewcommand{\fps@listing}{htp}
+\newenvironment{code}{
+    \captionsetup{type=listing}
+    \setlength{\abovecaptionskip}{5pt}
+    \setlength{\belowcaptionskip}{20pt}
+}{}
+
+% Header / Footer Style
+\newpagestyle{main}[\small]{
+ \setheadrule{.55pt}%
+ \sethead{}% left
+ {}% center
+ {\thesection\ \sectiontitle}% right
+ \setfootrule{.55pt}%
+ \setfoot{}% left
+ {\thepage}% center
+ {}% right
+}
+
+% BibLaTeX Dinge
+\usepackage[style=numeric-comp,sorting=none,backend=biber]{biblatex}
+\usepackage[babel,english=american]{csquotes}
+\bibliography{assets/include/bibliographie.bib}
+\setlength{\columnsep}{20pt}
+
+% Abbildungs- und Tabellenverzeichniss
+\addto\captionsenglish{
+    \renewcommand{\listfigurename}{List of Figures}
+}
+
+\addto\captionsenglish{
+    \renewcommand{\listtablename}{List of Tables}
+}
+
+\addto\captionsenglish{
+    \renewcommand\listoflistingscaption{List of Source Code}
+}
+
+
+
+\linespread{1.0}
+
+\def\myauthor#1{\def\MyAuthor{#1}}
+\def\mymatrikel#1{\def\MyMatrikel{#1}}
+\def\mythema#1{\def\MyThema{#1}}
+\def\debug#1{\def\Debug{#1}}
+\def\mybetreuer#1{\def\MyBetreuer{#1}}
+\def\myprof#1{\def\MyProhemf{#1}}
+\def\mydate#1{\def\MyDate{#1}}
+
+\mybetreuer{}
+\debug{false}
+
+%% Definieren der Arbeitsdaten Titel und Autor
+%%  #1: Autorenname
+%%  #2: Thema der Arbeit
+\newcommand{\mywork}[3]{%
+ \myauthor{#1}\mymatrikel{#2}\mythema{#3}%
+}
+
+\newcommand{\mytitle}{%
+ \thispagestyle{empty}%
+ \begin{center}%
+  \vspace*{0.2cm}%
+  \includegraphics[width=0.65\textwidth]{assets/img/usj_ingenieur_logo.png}\\[2em]%
+  
+  {\large \textbf{Course: Transversal ISI Project (ING4187)} \par}%
+  \vskip 1.2cm%
+  {\Large \textbf{\MyThema} \par}%
+  \vskip 1.8cm%
+  
+  {\large \textbf{Authors:} \par}%
+  \vskip 0.4cm%
+  {\normalsize%
+   Abba Adji Wriwiya (2324i177)\\%
+   Donfack Ateufack Robine Ninnone (2324i272)\\%
+   Djiofack Nguimgo Natacha Maurelle (2324i188)\\%
+   Nguisseu Assonzap Thomas Karim (2324i148)\\%
+   Simo Noumsi Abraham (2324i242)\\%
+   Tagne Yombo Manuel Fadhil (2324i319)\\%
+   Tsafack Tene Thierry Emmanuel (2324i171)%
+  \par}%
+  \vskip 1.5cm%
+  
+  {\large \textbf{Supervisor:} \par}%
+  \vskip 0.3cm%
+  {\normalsize \textbf{Dr.-Ing. Philippe Tamla} \par}%
+  \vskip 0.15cm%
+  {\small Professor for Data Science and Artificial Intelligence \par}%
+  {\small PostDoc Researcher, Department of Multimedia and Internet Applications \par}%
+  {\small Faculty of Mathematics and Computer Science \par}%
+  {\small Universit\"atsstr. 1, 58097 Hagen \par}%
+  
+  \vfill%
+  {\normalsize \textit{\today{}} \par}%
+ \end{center}%
+}
+
+
+
+
+
+\newcommand{\ueberschrift}[1]{\vskip 0.25cm \noindent \textbf{#1} \vskip 0.25cm}
+\newcommand{\sourcecode}[1]{\textsf{\textbf{#1}}}
+\newcommand{\linesource}[1]{
+ \begin{quote}
+  \textsf{\textbf{#1}}
+ \end{quote}
+}
+
+\renewcommand{\sectionmark}[1]%
+{\markright{Kapitel \thesection: #1}}
+
+\newcommand{\frontmatter}{
+ \thispagestyle{empty}
+ \pagenumbering{roman}
+}
+
+\newcommand{\mainmatter}{
+ \clearpage
+ \twocolumn
+ \pagestyle{main}
+ \pagenumbering{arabic}
+}
+
+\newcommand{\subsubsubsection}[1]{%
+ \vskip 0.25cm%
+ \noindent\textbf{#1}
+ %
+ %
+}
+
+\newcommand{\mybibliography}{%
+ \newpage%
+ \fancyhf{}%
+ \lhead{\bibname}%
+ \cfoot{\thepage}%
+ %%\clearpage
+ \addcontentsline{toc}{section}{\bibname}%
+}
+
+\newcommand{\isdebug}{%
+ \debug{true}%
+}
+
+\newcommand{\ifdebug}[1]{
+ \ifthenelse{\equal{\Debug}{true}}{#1}{}%
+}
+
+
+
+%% Einstellen der Seitenränder
+% Margins now handled by geometry package
+
