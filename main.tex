@@ -19,7 +19,7 @@
 \newpage
 
 \section*{Abstract}
-This paper establishes the framework for \textbf{Kingdom Communication Solutions (KCS) Media Studio}, a web-based platform for AI-assisted video transcription and multilingual caption editing. Focusing on three low-resource Cameroonian languages (Gh\textopeno m\'al\'a', Ewondo, and Basaa), it addresses critical infrastructure gaps in automated speech recognition (ASR). We detail a rigorous data-collection methodology utilizing KoboToolbox, ethical consent protocols, and an independent double-validation framework. Furthermore, we define a strict eight-parameter audio file-naming convention for ASR training. The project yields three primary deliverables: a technological platform, a validated linguistic corpus, and a standardized methodological framework for indigenous language preservation.
+This paper establishes the framework for \textbf{Kingdom Communication Solutions (KCS) Media Studio}, a web-based platform for AI-assisted video transcription and multilingual caption editing. Focusing on three low-resource Cameroonian languages (Gh\textopeno m\'al\'a', Ewondo, and Basaa), it addresses critical infrastructure gaps in automated speech recognition (ASR). We detail a rigorous data-collection methodology utilizing KoboToolbox, ethical consent protocols, and an independent double-validation framework. Furthermore, we define a strict nine-parameter audio file-naming convention for ASR training. The project yields three primary deliverables: a technological platform, a validated linguistic corpus, and a standardized methodological framework for indigenous language preservation.
 
 \vspace{1em}
 \noindent\textbf{Keywords:} \textit{AI Transcription, Multilingual Captioning, Low-Resource Languages, Cameroonian Languages, Kingdom Communication Solutions (KCS) Media Studio, Automatic Speech Recognition, Data Validation}
@@ -124,11 +124,11 @@ To ensure high semantic fidelity and orthographic consistency across Gh\textopen
 
 To ensure systematic indexing, strict traceability, and seamless ingestion into automated speech recognition (ASR) pipelines, raw audio recordings gathered during fieldwork must adhere to a robust, standardized naming convention. Relying on simplistic filenames prevents proper dataset auditing, obscures critical acoustic parameters, and hinders debugging when speech-to-text models encounter training anomalies.
 
-We implement a comprehensive, hierarchical nomenclature designed to encode eight core metadata parameters directly into every \texttt{.wav} file:
+We implement a comprehensive, hierarchical nomenclature designed to encode nine core metadata parameters directly into every \texttt{.wav} file:
 
 \vspace{0.5em}
 \begin{center}
-\texttt{ISO-Lang\_Variant\_Demographics\_Content\_Environment\_Location\_Timestamp\_ConceptID.wav}
+\texttt{ISO-Lang\_Variant\_Demographics\_Content\_Environment\_Location\_Timestamp\_ConceptID\_UID.wav}
 \end{center}
 \vspace{0.5em}
 
@@ -143,15 +143,16 @@ We implement a comprehensive, hierarchical nomenclature designed to encode eight
     \item[Location (Recording Origin):] A three-letter geographic code indicating where the session took place (e.g., \texttt{YAO} for Yaound\'e, \texttt{DLA} for Douala, \texttt{BFN} for Bafoussam).
     \item[Timestamp (Acquisition Date):] The exact date of capture formatted strictly as \texttt{YYYYMMDD} to maintain chronological version control.
     \item[ConceptID (Lexicon Index):] The exact sequential identifier corresponding to our predefined reading list of 363 words (ranging from \texttt{ASD-0001} to \texttt{ASD-0363}), ensuring a direct mapping between the audio file and its target textual definition.
+    \item[UID (Unique Identifier):] A cryptographically generated alphanumeric string (e.g., a short UUID or hash) appended to ensure absolute global uniqueness, preventing accidental overwrites even if all other parameters match.
 \end{description}
 
 \subsubsection*{Practical Application Example}
 
-Consider an audio recording captured on September 11, 2026, in Yaound\'e, where an adult male speaker reads the first word from our standardized 363-word lexicon under quiet indoor conditions. The resulting file is named as follows:
+Consider an audio recording captured on September 11, 2026, in Yaound\'e, where an adult male speaker reads the first word from our standardized 363-word lexicon under quiet indoor conditions, assigned the unique identifier \texttt{1a2b3c4d}. The resulting file is named as follows:
 
 \vspace{0.5em}
 \begin{center}
-\texttt{ewo\_yao\_ADL-M\_LEX\_QUI\_YAO\_20260911\_ASD-0001.wav}
+\texttt{ewo\_yao\_ADL-M\_LEX\_QUI\_YAO\_20260911\_ASD-0001\_1a2b3c4d.wav}
 \end{center}
 \vspace{0.5em}
 
