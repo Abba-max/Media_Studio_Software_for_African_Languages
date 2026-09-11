@@ -41,26 +41,7 @@
 \usepackage{tabulary}
 \usepackage{caption}
 
-% Better listings: minted
-%\usepackage[newfloat]{minted}
-\usepackage{minted}
-\usepackage{xcolor}
 
-\setminted{
-    fontsize=\scriptsize,
-    tabsize=2,
-    breaklines,
-    linenos,
-    frame=single
-}
-
-\usemintedstyle{tango}
-%\renewcommand{\fps@listing}{htp}
-\newenvironment{code}{
-    \captionsetup{type=listing}
-    \setlength{\abovecaptionskip}{5pt}
-    \setlength{\belowcaptionskip}{20pt}
-}{}
 
 % Header / Footer Style
 \newpagestyle{main}[\small]{
