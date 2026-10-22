@@ -5,14 +5,16 @@
 This repository contains the LaTeX source code for the academic paper introducing the Kingdom Communication Solutions (KCS) Media Studio, a web-based platform for AI-assisted video transcription and multilingual caption editing for low-resource Cameroonian languages.
 
 ## Compilation Instructions
-To compile the PDF locally, ensure you have a standard TeX distribution (like TeX Live or MiKTeX) installed.
-Run the following command in the terminal:
+To compile the PDFs locally, ensure you have a standard TeX distribution (like TeX Live or MiKTeX) installed.
+Run the following commands in the terminal:
 ```bash
-latexmk -pdf main.tex
+latexmk -pdf chapter0.tex
+latexmk -pdf chapter1.tex
+latexmk -pdf chapter2.tex
 ```
 
 ## Overleaf
-For collaborative editing, upload this entire directory as a zip file to Overleaf. The main file to compile is `main.tex`.
+For collaborative editing, upload this directory as a zip file to Overleaf. The documents can be compiled individually (`chapter0.tex` for Chapter 0, `chapter1.tex` for Chapter 1, `chapter2.tex` for Chapter 2).
 
 ## Supervisor
 **Dr.-Ing. Philippe Tamla**
