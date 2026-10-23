@@ -1,6 +1,9 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[pdftex]{color,graphicx}
 \usepackage{assets/include/elaboration}
+\usepackage{array}
+\usepackage{placeins}
+\usepackage{multirow}
 
 \mywork{Group Project}{2025-2026}{Project 2: Kingdom Communication Solutions (KCS) Media Studio - Web-Based AI Video Transcription and Multilingual Caption Editing}
 
@@ -20,6 +23,10 @@
 
 \frontmatter
 
+\tableofcontents
+
+\newpage
+
 \section*{List of Abbreviations and Glossary of Terms}
 \addcontentsline{toc}{section}{List of Abbreviations and Glossary of Terms}
 
@@ -28,36 +35,40 @@
 \small
 \caption{Glossary of Core Computational, Linguistic, and Methodological Terms}
 \label{tab:glossary_chap2}
-\begin{tabular}{p{3.2cm} p{14.3cm}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}p{14.3cm}}
 \toprule
-\textbf{Term / Acronym} & \textbf{Everyday Explanation and Practical Role in the Project} \\
+\textbf{Term / Acronym} & \textbf{Explanation and Practical Role in the Project} \\
 \midrule
-\textbf{ASR} & \textbf{Automatic Speech Recognition}: Computer software that listens to human speech and automatically types out what is said~\cite{amodei2016deep, radford2023robust}. \\
+\textbf{ASR} & \textbf{Automatic Speech Recognition}: Computational systems that convert spoken acoustic signals into written text~\cite{amodei2016deep, radford2023robust}. \\
 \addlinespace
-\textbf{CER / WER} & \textbf{Character / Word Error Rate}: Two standard ways to score transcription mistakes. Word Error Rate measures full-word mistakes. Character Error Rate measures letter-by-letter mistakes, which is vital for tonal languages where a single wrong accent mark changes the meaning of a word completely. \\
+\textbf{CER / WER} & \textbf{Character / Word Error Rate}: Standard evaluation metrics for transcription accuracy. WER scores whole-word correctness, whereas CER measures character-level precision, which is indispensable for tonal languages where a single diacritic alters lexical meaning completely. \\
 \addlinespace
-\textbf{CTC} & \textbf{Connectionist Temporal Classification}: A fast, direct speech recognition method that turns audio sounds directly into letters without needing complex extra alignment software~\cite{graves2006connectionist, kurzinger2020ctc}. \\
+\textbf{CTC} & \textbf{Connectionist Temporal Classification}: An end-to-end neural sequence alignment algorithm mapping continuous audio frames directly to output character sequences without requiring external phonetic aligners~\cite{graves2006connectionist, kurzinger2020ctc}. \\
 \addlinespace
-\textbf{GACL / AGCL} & \textbf{General Alphabet of Cameroonian Languages}: The official national alphabet created in 1979 by Tadadjeu and Sadembouo~\cite{tadadjeu1979alphabet} so all Cameroonian languages can be written clearly using standardized letters and accent marks. \\
+\textbf{GACL / AGCL} & \textbf{General Alphabet of Cameroonian Languages}: The national standard orthography established in 1979 by Tadadjeu and Sadembouo~\cite{tadadjeu1979alphabet} to transcribe all Cameroonian languages consistently using unified phonetic characters and tone diacritics. \\
 \addlinespace
-\textbf{MMS / XLS-R} & \textbf{Massively Multilingual Speech / Cross-Lingual Speech Representations}: Modern AI foundation models pre-trained on speech across many languages that can be fine-tuned on local audio~\cite{babu2022xlsr, pratap2024scaling}. \\
+\textbf{MMS / XLS-R} & \textbf{Massively Multilingual Speech / Cross-Lingual Speech Representations}: Self-supervised speech foundation models pre-trained across hundreds of languages and adaptable to local low-resource speech via downstream fine-tuning~\cite{babu2022xlsr, pratap2024scaling}. \\
 \addlinespace
-\textbf{PRISMA} & \textbf{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}: An internationally recognized checklist that ensures literature searches are clear, honest, and reproducible~\cite{page2021prisma}. \\
+\textbf{NFC / NFD} & \textbf{Normalization Form C / D}: Unicode normalization standards. NFC combines base characters and diacritics into precomposed canonical code points, whereas NFD decomposes them into base glyphs followed by combining diacritical marks~\cite{unicode2024standard}. \\
 \addlinespace
-\textbf{Tone} & The musical pitch of the speaker's voice (high, medium, or low). In Cameroonian languages, changing the voice pitch changes the meaning of the word completely. \\
+\textbf{PRISMA} & \textbf{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}: An evidence-based minimum guideline for transparent and reproducible systematic literature reviews~\cite{page2021prisma}. \\
 \addlinespace
-\textbf{Diacritic Stacking} & Typing one or more small accent marks directly on top of special base letters, such as open-o (\textopeno) or schwa (\textschwa). \\
+\textbf{Tone} & Contrastive vocal pitch register (high, mid, low) or contour. In Cameroonian tonal languages, pitch contrasts distinguish both lexical items and grammatical inflection. \\
 \addlinespace
-\textbf{Web Audio API} & A tool built right into modern web browsers that lets web applications play sound, draw audio waveforms, and edit sound instantly without lag~\cite{w3c2021webaudio}. \\
+\textbf{Diacritic Stacking} & Placement of one or more tone-marking diacritical accents directly above or below base phonetic characters, such as open-o (\textopeno) or schwa (\textschwa). \\
 \addlinespace
-\textbf{WebVTT} & \textbf{Web Video Text Tracks}: The standard subtitle file format (\texttt{.vtt}) used across internet browsers to display timed captions on web video players~\cite{w3c2019webvtt}. \\
+\textbf{Web Audio API} & High-performance browser-native audio processing API enabling direct client-side sound decoding, waveform rendering, and sub-15ms scrubbing~\cite{w3c2021webaudio}. \\
 \addlinespace
-\textbf{Nunamaker SDIS} & A four-stage research framework~\cite{nunamaker1990systems} that guides software projects from observing real problems to building and testing working tools with real users. \\
+\textbf{WebVTT} & \textbf{Web Video Text Tracks}: W3C standard format (\texttt{.vtt}) for timed subtitles and video text track synchronization~\cite{w3c2019webvtt}. \\
+\addlinespace
+\textbf{Nunamaker SDIS} & Systems Development in Information Systems research framework~\cite{nunamaker1990systems} progressing through observation, theory building, system design, and empirical evaluation. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \mainmatter
+
+\setcounter{section}{1}
 
 \section{Chapter 2: State of the Art (Observation Phase)}
 \label{sec:chap2_state_of_the_art}
@@ -65,45 +76,101 @@
 \subsection{Introduction and Review Scope}
 \label{sec:chap2_intro}
 
-Chapter~1 established the foundational goals and context for the \textbf{Kingdom Communication Solutions (KCS) Media Studio}\footnote{The KCS Media Studio is a web-based platform engineered to provide AI speech-to-text transcription, dialect-adaptive caption editing, and synchronized video subtitling for indigenous Cameroonian languages.}. We documented two motivating real-world challenges: protecting our cultural oral heritage from digital disappearance (\textbf{MS1}), and ensuring that vital public information in health, education, and civic affairs reaches all citizens in languages they readily understand (\textbf{MS2}). Chapter~1 also formulated our two core problem statements: standard speech AI models fail completely on Cameroonian tonal languages (\textbf{PS1}), and existing video editing software cannot display local letters or handle regional dialect differences (\textbf{PS2}). To address these issues, we set forth two guiding research questions: how to support regional village dialects without alienating local speakers (\textbf{RQ1}), and how to build a responsive browser-based video editor that integrates speech AI with local dictionaries (\textbf{RQ2}).
+Chapter~1 established the foundational goals and context for the \textbf{Kingdom Communication Solutions (KCS) Media Studio}\footnote{The KCS Media Studio is a web-based platform engineered to provide AI speech-to-text transcription, dialect-adaptive caption editing, and synchronized video subtitling for indigenous Cameroonian languages.}. We documented two motivating real-world challenges: protecting our cultural oral heritage from digital disappearance (\textbf{MS1}), and ensuring that vital public information in health, education, and civic affairs reaches all citizens in languages they readily understand (\textbf{MS2}):
+\begin{itemize}
+    \item \textbf{MS1 (Cultural Oral Heritage Preservation):} In Cameroon, cultural traditions and indigenous knowledge have historically been preserved through spoken storytelling~\cite{grenoble2010language}. When indigenous languages are absent from modern digital video formats, younger generations switch predominantly to official European languages, accelerating language loss across generations~\cite{adelani2022masakhaner}.
+    \item \textbf{MS2 (Making Essential Information Understandable to Everyone):} During critical public communication events---such as healthcare campaigns against infectious diseases, agricultural extension advisories, and civic voter education---information broadcasts delivered solely in French or English fail to reach rural and peri-urban populations. Over 35\% of rural citizens in Cameroon do not have fluent literacy in official European languages, yet they fully understand spoken local languages~\cite{mayer2020multimedia, bigioi2023multilingual}. Subtitled video offers an effective medium for knowledge transfer, yet creators currently lack assistive software, forcing exhausting manual transcription and alignment~\cite{won2025endtoend}.
+\end{itemize}
 
-This chapter carries out the \textbf{Observation phase} of the Nunamaker Systems Development in Information Systems (SDIS) framework~\cite{nunamaker1990systems}. It directly fulfills research objectives \textbf{RO1.1.O} (auditing regional dialects and translator difficulties) and \textbf{RO2.1.O} (benchmarking speech recognition accuracy, font rendering, and audio waveform synchronization). Before building any new software, good engineering research requires looking closely at existing tools, testing what works and what fails, and identifying exactly why current technology falls short. 
+Chapter~1 also formulated our two core problem statements: standard speech AI models fail on Cameroonian tonal languages (\textbf{PS1}), and existing video editing software cannot display local letters or handle regional dialect differences (\textbf{PS2}). To address these issues, we set forth two guiding research questions: how to support regional village dialects without alienating local speakers (\textbf{RQ1}), and how to build a responsive browser-based video editor that integrates speech AI with local dictionaries (\textbf{RQ2}).
 
-To ensure complete clarity for every reader, this chapter explains all technical ideas in simple, everyday language without complex mathematical formulas. We focus on three major Cameroonian languages:
+This chapter carries out the \textbf{Observation phase} of the Nunamaker Systems Development in Information Systems (SDIS) framework~\cite{nunamaker1990systems}. It directly fulfills research objectives \textbf{RO1.1.O} and \textbf{RO2.1.O}:
+\begin{itemize}
+    \item \textbf{RO1.1.O (Observation):} Interview native translators to document specific dialect variations, slang words, and spelling confusions in existing video tools.
+    \item \textbf{RO2.1.O (Observation):} Benchmark client-side audio rendering latency and diagnose font-clipping bugs for GACL characters in WebVTT subtitle tracks.
+\end{itemize}
+
+According to Ethnologue (2021)~\cite{eberhard2021ethnologue}, Cameroon hosts \textbf{281 living indigenous languages}. To construct a rigorous, representative empirical baseline, we focus our observation across three distinct linguistic groups:
 \begin{enumerate}
-    \item \textbf{Gh\textopeno m\'al\'a'}\footnote{ISO 639-3 code: \texttt{bbj}. Spoken by over 1.1 million people in the West Region (Mifi, Koung-Khi, and Hauts-Plateaux divisions). It belongs to the Eastern Grassfields Bamileke branch of Southern Bantoid languages~\cite{watters2007bamileke}.} is an Eastern Grassfields language spoken by more than 1.1 million people in the West Region, celebrated for its rich system of voice pitch tones and vowels.
-    \item \textbf{Ewondo}\footnote{ISO 639-3 code: \texttt{ewo}; Guthrie code: A72. Spoken by over 2.5 million first- and second-language speakers across the Centre and South Regions, functioning as the historical vehicular language of Yaound\'e~\cite{essono2010ewondo}.} is a Beti-Pahuin Bantu language spoken by more than 2.5 million people in the Centre and South Regions and in Cameroon's capital city.
-    \item \textbf{Basaa}\footnote{ISO 639-3 code: \texttt{bas}; Guthrie code: A43. Spoken by roughly 800,000 people across the Littoral and Centre Regions, particularly in the Sanaga-Maritime and Nyong-et-K\'ell\'e divisions~\cite{njiki2015grammaire, bitjaa2017dialectologie}.} is a Narrow Bantu language of the A40 zone with rich oral literature and detailed verb prefixes.
+    \item \textbf{Gh\textopeno m\'al\'a'}\footnote{ISO 639-3 code: \texttt{bbj}. Spoken by over 1.1 million people in the West Region (Mifi, Koung-Khi, and Hauts-Plateaux divisions). Belongs to the Eastern Grassfields Bamileke branch of Southern Bantoid languages~\cite{watters2003grassfields, sadembouo1984systematique}.} is an Eastern Grassfields language spoken by more than 1.1 million people in the West Region, recognized for its complex system of contrastive pitch tones and expanded vowel inventory.
+    \item \textbf{Ewondo}\footnote{ISO 639-3 code: \texttt{ewo}; Guthrie code: A72. Spoken by over 2.5 million first- and second-language speakers across the Centre and South Regions, functioning as the historical vehicular language of Yaound\'e~\cite{essono2000ewondo, bitjaakody2001basaa}.} is a Beti-Pahuin Bantu language spoken by more than 2.5 million speakers across the Centre and South Regions and Cameroon's capital city.
+    \item \textbf{Basaa}\footnote{ISO 639-3 code: \texttt{bas}; Guthrie code: A43. Spoken by roughly 800,000 people across the Littoral and Centre Regions, particularly in the Sanaga-Maritime and Nyong-et-K\'ell\'e divisions~\cite{lemb1973dictionnaire, bitjaakody2001basaa}.} is a Narrow Bantu language of the A40 zone with rich oral literature, complex tonal patterns, and agglutinative noun-verb morphology.
 \end{enumerate}
 
-Following the structure outlined in Chapter~1, this review examines how current speech models perform on local languages, explains why existing video subtitle editors fail, compares existing solutions side by side, and concludes with four concrete design challenges ($C_1$--$C_4$) that our team will solve in Chapter~3.
+This review examines foundation speech models, audits commercial subtitle editors, synthesizes comparative capabilities, and concludes with ten concrete engineering challenges ($C_1$--$C_{10}$) that directly guide the Chapter~3 system design.
 
-\subsection{Review Questions and Search Method}
+\subsection{Review Questions, Search Method, and Mapping}
 \label{sec:chap2_method}
 
 To ensure our review examines every requirement identified in Chapter~1 thoroughly and objectively, we formulated \textbf{nine Review Questions} ($\text{RQ}_{\text{Rev}}$):
-
 \begin{enumerate}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$1 (Speech Recognition Foundation Models):} \textit{Which modern speech recognition models can be adapted to low-resource African languages, and how well do they work out of the box on local speech?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$2 (Voice Pitch and Tone):} \textit{Why do standard speech AI models confuse words in Cameroonian tonal languages, and how does voice pitch change word meanings in Gh\textopeno m\'al\'a', Ewondo, and Basaa?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$3 (Writing Systems and Accent Marks):} \textit{Why does standard computer software break when typing or displaying letters with stacked accent marks from the 1979 General Alphabet of Cameroonian Languages (GACL)?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$4 (Regional Village Dialects):} \textit{How do spoken words and pronunciations differ across villages within Gh\textopeno m\'al\'a', Ewondo, and Basaa, and how can software accommodate these regional words without alienating community members?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$5 (Field Data Collection in Rural Areas):} \textit{How can teams collect high-quality voice recordings in rural areas with poor internet connectivity, reliable equipment, and documented informed consent?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$6 (Audio File Organization and Quality Control):} \textit{How should audio recordings be named and indexed so files never get mixed up, and how does a two-tier double-validation process prevent bad recordings from corrupting AI training?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$7 (Commercial Video Subtitle Editors):} \textit{What are the specific limitations of existing video editing suites (such as Adobe Premiere Pro, DaVinci Resolve, or YouTube Studio) when applied to African languages?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$8 (Subtitle Timing and Bantu Text Expansion):} \textit{Why does translating European video dialogue into Bantu languages cause subtitle text to expand by 30\% to 50\%, and how can browser sound waves help editors keep captions synchronized?}
-    \item \textbf{$\text{RQ}_{\text{Rev}}$9 (Measuring System Success and Usability):} \textit{What objective accuracy scores, speed measurements, and user satisfaction surveys should be used to prove that the platform genuinely helps translators?}
+    \item \textbf{$\text{RQ}_{\text{Rev}}$1 (Speech Foundation Models):} Which speech foundation models can be adapted to low-resource African languages, and how accurately do they transcribe local speech out of the box?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$2 (Voice Pitch and Tonal Contrast):} Why do standard speech recognition models confuse words in Cameroonian tonal languages, and how does pitch alter lexical meaning in Gh\textopeno m\'al\'a', Ewondo, and Basaa?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$3 (Writing Systems and Diacritics):} Why does standard software fail when displaying stacked diacritics from the 1979 General Alphabet of Cameroonian Languages (GACL)?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$4 (Regional Village Dialects):} How do vocabulary and pronunciation shift across village dialects, and how can software accommodate these variants without alienating native speakers?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$5 (Field Data Acquisition):} How can teams collect pristine audio in rural areas lacking reliable cellular internet and electricity while securing documented informed consent?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$6 (Audio Nomenclature and Data Governance):} How should field recordings be indexed to prevent train-test data leakage, and how does a two-tier validation workflow protect training data quality?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$7 (Commercial Video Editors):} What specific functional gaps emerge when using suites like Adobe Premiere Pro, DaVinci Resolve, or YouTube Studio for Cameroonian languages?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$8 (Bantu Text Expansion and Synchronization):} Why does translating dialogue into Bantu languages expand subtitle text by 30\% to 50\%, and how do client-side waveforms resolve timeline drift?
+    \item \textbf{$\text{RQ}_{\text{Rev}}$9 (Evaluation Metrics):} What objective accuracy scores and usability benchmarks are needed to verify that the platform genuinely improves translator productivity?
 \end{enumerate}
 
-\subsubsection{How We Searched the Literature}
-On October 18, 2026, we performed a systematic search across five major academic databases: \textbf{IEEE Xplore}, \textbf{ACM Digital Library}, \textbf{ACL Anthology}, \textbf{Scopus}, and \textbf{Google Scholar}. We focused on research published between 2006 and 2026. Table~\ref{tab:search_queries} lists the exact search queries used and the number of records retrieved from each source.
+Table~\ref{tab:rq_mapping} maps these nine Review Questions directly to the Nunamaker Observation Objectives defined in Chapter~1.
 
 \begin{table*}[t]
 \centering
 \small
-\caption{Systematic Literature Search Queries and Retrieved Records across Scholarly Databases}
+\caption{Systematic Mapping of Review Questions to Nunamaker Observation Research Objectives}
+\label{tab:rq_mapping}
+\begin{tabular}{p{2.6cm} p{4.0cm} p{3.2cm} >{\raggedright\arraybackslash}p{6.8cm}}
+\toprule
+\textbf{Review Question} & \textbf{Thematic Focus Area} & \textbf{Chapter 1 Objective} & \textbf{Observation Deliverable and Scope} \\
+\midrule
+$\text{RQ}_{\text{Rev}}1$, $\text{RQ}_{\text{Rev}}2$ & Speech Foundation Models \& Tone & \textbf{RO2.1.O} (Observation) & ASR diagnostic error baseline, pitch modeling gap, and CTC character decoding requirements. \\
+\addlinespace
+$\text{RQ}_{\text{Rev}}3$, $\text{RQ}_{\text{Rev}}7$ & GACL Diacritics \& Video Editors & \textbf{RO2.1.O} (Observation) & Subtitle editor typography audit, WebVTT rendering failures, and font-clipping diagnosis. \\
+\addlinespace
+$\text{RQ}_{\text{Rev}}4$ & Regional Village Dialect Continua & \textbf{RO1.1.O} (Observation) & Sociolinguistic audit of lexical variation and translator usability barriers. \\
+\addlinespace
+$\text{RQ}_{\text{Rev}}5$, $\text{RQ}_{\text{Rev}}6$ & Field Collection \& Governance & \textbf{RO1.1.O} (Observation) & Offline mobile data collection, 9-parameter audio nomenclature, and train-test leakage control. \\
+\addlinespace
+$\text{RQ}_{\text{Rev}}8$, $\text{RQ}_{\text{Rev}}9$ & Bantu Expansion \& Usability & \textbf{RO2.1.O} (Observation) & Morphological expansion timing drift, browser Web Audio latency, and productivity benchmarking. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsubsection{Literature Search Execution and Protocol}
+\label{sec:chap2_search_lit}
+On October 18, 2026, we performed a systematic search across five major electronic bibliographic databases: \textbf{IEEE Xplore}, \textbf{ACM Digital Library}, \textbf{ACL Anthology}, \textbf{Scopus}, and \textbf{Google Scholar}, focusing on literature published between 2006 and 2026. All search strings, timestamps, hit counts, and screening determinations were recorded in our open-access GitHub repository search log\footnote{The complete machine-readable PRISMA search log is deposited at: \url{https://github.com/Abba-max/Media_Studio_Software_for_African_Languages}.}.
+
+\subsubsection{Selection Criteria and PRISMA Flow}
+\label{sec:chap2_select_papers}
+We applied explicit inclusion and exclusion criteria to ensure scientific and technical relevance:
+\begin{itemize}
+    \item \textbf{Inclusion Criteria:} 
+    \begin{itemize}
+        \item $IC_1$: Peer-reviewed conference or journal publications, authoritative international technical standards (e.g., W3C recommendations, Unicode Consortium specifications), and authoritative reference grammars or phonetic dictionaries.
+        \item $IC_2$: Explicit focus on low-resource speech recognition, African or Bantu tonal phonology, mobile language documentation, or web-based video captioning technology.
+        \item $IC_3$: Empirical evaluation, documented corpora, reproducible architectures, or validated usability metrics.
+        \item $IC_4$: Published or officially released between 2006 and 2026.
+    \end{itemize}
+    \item \textbf{Exclusion Criteria:} 
+    \begin{itemize}
+        \item $EC_1$: Commercial vendor promotional whitepapers lacking peer review, verifiable methodology, or source access.
+        \item $EC_2$: Studies evaluating high-resource Indo-European languages exclusively without low-resource adaptation mechanisms.
+        \item $EC_3$: Extended abstracts lacking reproducible empirical results or technical depth.
+        \item $EC_4$: Research focusing strictly on physical television broadcast hardware or analog transmission protocols without relevance to digital web captioning.
+    \end{itemize}
+\end{itemize}
+
+Following the PRISMA framework~\cite{page2021prisma}, 342 initial records were identified, deduplicated, screened, and evaluated for full-text eligibility. Table~\ref{tab:search_queries} summarizes the search queries across the databases, and Table~\ref{tab:prisma_flow} details the PRISMA screening flow, yielding \textbf{41 included primary studies} as our empirical foundation.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Systematic Literature Search Strategy and Record Retrieval Across Academic Databases}
 \label{tab:search_queries}
-\begin{tabular}{p{2.6cm} p{10.2cm} p{1.8cm} p{1.5cm}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}p{10.2cm} p{1.6cm} p{1.4cm}}
 \toprule
 \textbf{Database} & \textbf{Search Query} & \textbf{Years} & \textbf{Records} \\
 \midrule
@@ -117,146 +184,144 @@ Scopus & \texttt{TITLE-ABS-KEY(("African languages" OR "tonal phonology") AND ("
 \addlinespace
 Google Scholar & \texttt{"General Alphabet of Cameroonian Languages" OR "GACL diacritics" OR "KoboToolbox speech collection"} & 2006--2026 & 64 \\
 \midrule
-\multicolumn{3}{l}{\textbf{Total Records Retrieved Across All Databases}} & \textbf{342} \\
+\multicolumn{3}{l}{\textbf{Total Records Retrieved Across All 5 Databases}} & \textbf{342} \\
 \bottomrule
 \end{tabular}
 \end{table*}
-
-\subsubsection{Selecting Relevant Papers}
-To keep our review disciplined, honest, and high quality, we applied straightforward inclusion and exclusion rules:
-
-\begin{itemize}
-    \item \textbf{Inclusion Criteria ($IC$):}
-    \begin{itemize}
-        \item \textbf{$IC_1$ (Scientific Authority):} Peer-reviewed journal articles, conference papers, or authoritative institutional books published by recognized academic presses.
-        \item \textbf{$IC_2$ (Topic Relevance):} Research directly addressing speech recognition for low-resource languages, African tonal linguistics, mobile fieldwork data collection, or browser-based audio tools.
-        \item \textbf{$IC_3$ (Concrete Evidence):} Studies presenting real algorithmic models, measured error rates (WER, CER), acoustic recordings, or formal usability benchmarks.
-        \item \textbf{$IC_4$ (Time Period):} Published between January 1, 2006, and October 2026.
-    \end{itemize}
-    \item \textbf{Exclusion Criteria ($EC$):}
-    \begin{itemize}
-        \item \textbf{$EC_1$ (Marketing Material):} Commercial vendor brochures and marketing claims lacking independent scientific verification.
-        \item \textbf{$EC_2$ (High-Resource Exclusivity):} Studies evaluating exclusively common European or Asian languages without any adaptation to low-resource or tonal settings.
-        \item \textbf{$EC_3$ (Incomplete Documentation):} Short summaries without full papers, non-reproducible software releases, or inaccessible datasets.
-        \item \textbf{$EC_4$ (Irrelevant Video Hardware):} Studies focusing purely on broadcast television transmitters or hardware compression chips without reference to subtitle text or speech timing.
-    \end{itemize}
-\end{itemize}
-
-Following the international PRISMA guideline~\cite{page2021prisma}, the 342 identified records underwent deduplication, title/abstract screening, and full-text eligibility review. Table~\ref{tab:prisma_flow} details the selection flow, yielding \textbf{41 primary studies and standards} retained as the solid empirical foundation for this chapter.
 
 \begin{table*}[t]
 \centering
 \small
-\caption{PRISMA Systematic Literature Screening and Eligibility Flow}
+\caption{PRISMA 2020 Study Screening, Eligibility Review, and Selection Flow}
 \label{tab:prisma_flow}
-\begin{tabular}{p{5.5cm} p{2.2cm} p{8.8cm}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.8cm} p{2.2cm} >{\raggedright\arraybackslash}p{9.4cm}}
 \toprule
-\textbf{Selection Step} & \textbf{Number of Papers} & \textbf{What Was Done at This Step} \\
+\textbf{PRISMA Selection Step} & \textbf{Record Count} & \textbf{Methodological Action and Exclusion Justification} \\
 \midrule
-\textbf{1. Initial Identification} & $N = 342$ & Retrieved across the 5 scholarly indexing databases. \\
+\textbf{1. Initial Identification} & $N = 342$ & Identified through structured Boolean search across the five academic databases. \\
 \addlinespace
-\textbf{2. Deduplication} & $n = 258$ & Removed 84 identical cross-indexed records. \\
+\textbf{2. Deduplication} & $n = 258$ & Removed 84 identical cross-indexed duplicate records. \\
 \addlinespace
-\textbf{3. Title and Abstract Screening} & $n = 92$ & Excluded 166 records under criteria $EC_1$, $EC_2$, and $EC_4$. \\
+\textbf{3. Title and Abstract Screening} & $n = 92$ & Removed 166 records failing relevance criteria $EC_1$, $EC_2$, and $EC_4$. \\
 \addlinespace
-\textbf{4. Full-Text Eligibility Assessment} & $n = 41$ & Excluded 51 full papers: 24 lacked low-resource testing, 17 lacked reproducible data, and 10 lacked technical depth. \\
+\textbf{4. Full-Text Eligibility Review} & $n = 41$ & Excluded 51 articles: 24 lacked low-resource testing, 17 lacked reproducible data, and 10 lacked technical depth. \\
 \addlinespace
-\textbf{5. Included Primary Studies} & $\mathbf{n = 41}$ & Retained as the verified empirical foundation for this review. \\
+\textbf{5. Included Primary Studies} & $\mathbf{n = 41}$ & Final verified empirical corpus retained for systematic analysis and benchmarking. \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-\subsection{Speech Recognition Foundation Models and Voice Pitch}
+\subsection{Speech Recognition Foundation Models and Tonal Pitch Modeling}
 \label{sec:chap2_asr}
 
-This section answers \textbf{$\text{RQ}_{\text{Rev}}$1} and \textbf{$\text{RQ}_{\text{Rev}}$2} by examining modern speech AI models and explaining why they fail on African tonal languages.
+This section addresses \textbf{$\text{RQ}_{\text{Rev}}$1} and \textbf{$\text{RQ}_{\text{Rev}}$2} by examining modern speech foundation models and analyzing their failure modes on African tonal languages.
 
-In recent years, speech recognition technology has advanced dramatically through large AI foundation models~\cite{baevski2020wav2vec, babu2022xlsr, pratap2024scaling, radford2023robust}. Instead of building a speech model from scratch for every single language, developers train a large neural network on tens of thousands of hours of audio from many different languages. In simple terms, the AI learns what human speech sounds like in general—how people pause, articulate vowels, and form consonants. Once this general knowledge is learned, developers can adapt or "fine-tune" the model to understand a new local language using only a modest amount of recorded and transcribed speech.
+Over the past five years, automatic speech recognition has shifted toward self-supervised foundation architectures~\cite{baevski2020wav2vec, babu2022xlsr, pratap2024scaling, radford2023robust}. Rather than training acoustic models from scratch, large neural networks are pre-trained on tens of thousands of hours of unlabelled speech audio. The network learns generalized acoustic representations of human speech, capturing phoneme boundaries, formant transitions, and coarticulation effects. Once pre-trained, the model can be fine-tuned on a target language using modest amounts of supervised audio.
 
 \subsubsection{The Commercial Technological Gap in Central Africa}
-Despite these global advances, commercial speech platforms still completely ignore Cameroonian languages~\cite{joshi2020state}:
+\label{sec:chap2_asr_gap}
+Despite rapid global adoption, commercial cloud speech platforms overlook Cameroonian languages entirely~\cite{joshi2020state}:
 \begin{itemize}
-    \item \textbf{Commercial Cloud APIs (Google Cloud Speech, Microsoft Azure Speech):} Both platforms support over 100 languages worldwide, but neither offers support for any of Cameroon's 281 national indigenous languages~\cite{eberhard2021ethnologue, lewis2009ethnologue}.
-    \item \textbf{OpenAI Whisper (Large-v3)~\cite{radford2023robust}:} Whisper was trained on 680,000 hours of audio, but covers only 99 languages. Less than 0.1\% of its training data originated from sub-Saharan Africa, and zero hours came from Cameroonian languages. In empirical tests on recordings of Gh\textopeno m\'al\'a', Ewondo, and Basaa, Whisper exhibited a \textbf{100\% Word Error Rate}. Because the model lacks language identification tokens for these languages, it either stayed completely silent or hallucinated random Latin words.
-    \item \textbf{Meta MMS (Massively Multilingual Speech)~\cite{pratap2024scaling}:} Meta pre-trained wav2vec~2.0 models across 1,400 languages using audiobook recordings. However, for African languages, training relied almost entirely on audio recordings of the New Testament. In baseline zero-shot tests on everyday conversational speech, MMS yielded error rates of \textbf{74.2\% on Ewondo}, \textbf{86.5\% on Gh\textopeno m\'al\'a'}, and \textbf{81.3\% on Basaa}. Over 70\% of these errors stemmed from voice pitch confusion and broken accent marks.
+    \item \textbf{Commercial Cloud Speech APIs:} Official documentation for Google Cloud Speech-to-Text~\cite{googlecloudspeech2026} and Microsoft Azure Cognitive Services Speech~\cite{azurespeech2026} confirms that neither vendor supports any of Cameroon's 281 indigenous languages.
+    \item \textbf{OpenAI Whisper (Large-v3)~\cite{radford2023robust}:} Whisper was trained on 680,000 hours of multi-source audio across 99 languages. However, less than 0.1\% of its training corpus originated from sub-Saharan Africa, and zero hours came from Cameroonian languages. Because Whisper completely lacks language identification tokens and acoustic training representations for Ewondo, Basaa, or Gh\textopeno m\'al\'a', applying off-the-shelf Whisper to these idioms results in transcription failure---the model either produces hallucinations in unrelated European languages or outputs silence.
+    \item \textbf{Meta MMS (Massively Multilingual Speech)~\cite{pratap2024scaling}:} Meta expanded pre-trained wav2vec~2.0 models across 1,400 languages using religious scripture readings from Faith Comes By Hearing (FCBH). For Cameroonian languages including Ewondo (\texttt{ewo}), Basaa (\texttt{bas}), and Gh\textopeno m\'al\'a' (\texttt{bbj}), MMS included read-speech scripture audio. However, \textbf{zero open, conversational, or video-aligned colloquial speech corpora with standardized GACL orthography existed}. Because scripture read-speech differs sharply from informal video dialogue and the base MMS output vocabulary lacks GACL tone-marking diacritics, off-the-shelf MMS is not suited for conversational video captioning without downstream adaptation.
 \end{itemize}
 
-\subsubsection{Why Do Global Models Fail on Cameroonian Speech?}
-Our review reveals two clear reasons why standard models fail when listening to local speech:
-
-\paragraph{1. Speech Models Ignore Voice Pitch (Tone).}
-Cameroonian languages are fundamentally tonal. In non-tonal languages like English or French, raising the pitch of your voice expresses emotion or turns a statement into a question (such as saying \textit{"Really?"} with a rising pitch). However, in Cameroonian languages, the musical pitch of the speaker's voice (high, mid, or low) completely changes the actual meaning of the word~\cite{mfonyam1994tone, essono2010ewondo}:
+\paragraph{Methodological Baseline and Hypotheses for Chapter 5.}
+Rather than assuming unverified baseline metrics prior to experimental testing, we formulate our performance expectations as testable research hypotheses to be empirically benchmarked in Chapter~5:
 \begin{itemize}
-    \item In \textbf{Gh\textopeno m\'al\'a'}, pronouncing the syllable \textit{ts}\textopeno{} with a high pitch (\textit{ts}\textopeno\textasciiacute{}), a mid pitch (\textit{ts}\textopeno), or a low pitch (\textit{ts}\textopeno\textasciigrave{}) produces three completely distinct words with unrelated meanings~\cite{kamga2021phonetic}.
-    \item In \textbf{Ewondo} and \textbf{Basaa}, the pitch on word prefixes indicates grammatical tense. Changing the pitch on a single vowel turns a sentence from the past tense into the present or future tense~\cite{essono2010ewondo, njiki2015grammaire}.
+    \item \textbf{Hypothesis $H_1$ (ASR Baseline Error and CTC Adaptation):} We hypothesize that evaluating off-the-shelf MMS on conversational Cameroonian video dialogue will yield a baseline Word Error Rate exceeding 75\%, with tone confusion and diacritic omission representing the dominant error categories. Downstream fine-tuning with character-level CTC using a dedicated GACL vocabulary is hypothesized to reduce Word Error Rate below 35\% and Character Error Rate below 15\%.
 \end{itemize}
-Because foundation models like Whisper or wav2vec~2.0 were trained primarily on European languages, their acoustic encoders treat voice pitch variations as background noise and filter them out~\cite{nahabwe2026benchmarking}. As a result, the model constantly confuses words that sound similar but carry different tones.
 
-\paragraph{2. Tokenizers Break Accent Marks into Disconnected Pieces.}
-To turn speech into text, software uses a "tokenizer" to chop sentences into small pieces. The 1979 General Alphabet of Cameroonian Languages (GACL)~\cite{tadadjeu1979alphabet} introduces specialized vowels (\textopeno, \textschwa) that require accent marks stacked on top of them to show pitch. In computer systems, an accented letter is often stored as two separate parts: the base letter followed by an accent mark\footnote{Under the Unicode Standard~\cite{unicode2024standard}, an accented vowel is frequently represented as a two-character sequence: a base character (e.g., \textopeno{} \texttt{U+0254}) followed by a combining diacritical code point (e.g., combining acute accent \texttt{U+0301}).}. Standard tokenizers designed for English or French chop the accent mark away from the base letter, turning the word into broken, unreadable fragments~\cite{joshi2020state}. This fragmentation degrades decoding accuracy and produces high Character Error Rates (CER).
+\subsubsection{Architectural Causes of Model Failure on Cameroonian Speech}
+\label{sec:chap2_asr_failures}
+Our empirical investigation identifies three primary architectural causes for these failures:
 
-\subsubsection{The Solution: Simple CTC Character Alignment}
-To fix these errors without spending millions of dollars on massive computer clusters, the most effective approach is to fine-tune a pre-trained model like MMS using \textbf{Connectionist Temporal Classification (CTC)}~\cite{graves2006connectionist}. CTC works directly at the character level: it listens to short audio segments and outputs complete letters directly, one by one. By adding our complete alphabet with all its accent marks directly into the model's vocabulary list, the system outputs the correct accented letters without slicing them apart.
+\paragraph{1. Lack of Pitch Prioritization in Latent Acoustic Encoders.}
+Cameroonian languages are fundamentally tonal. In non-tonal languages like English or French, pitch variation conveys pragmatic emphasis or interrogative mood. In contrast, in Cameroonian languages, relative vocal pitch (high, mid, low) carries lexical and grammatical meaning~\cite{essono2000ewondo, lemb1973dictionnaire, sadembouo1984systematique, watters2003grassfields}:
+\begin{itemize}
+    \item In \textbf{Ewondo}~\cite{essono2000ewondo}, pitch contrasts distinguish lexical minimal pairs: \textit{k\'ab} (high tone) denotes ``antelope'', whereas \textit{k\`ab} (low tone) denotes ``to tear or rip''. Similarly, \textit{m\'\textopeno} (high tone) denotes ``hand'', whereas \textit{m\`\textopeno} (low tone) denotes ``child''. Pitch inflection on verbal prefixes also signals grammatical tense.
+    \item In \textbf{Basaa}~\cite{lemb1973dictionnaire}, pitch determines lexical semantics: \textit{h\'\textepsilon} (high tone) signifies ``knife'', whereas \textit{h\`\textepsilon} (low tone) signifies ``to surpass or excel''.
+    \item In \textbf{Gh\textopeno m\'al\'a'}~\cite{sadembouo1984systematique, watters2003grassfields}, lexical minimal pairs rely entirely on tone register: \textit{ts\'o} (high tone) signifies ``to pierce'', whereas \textit{ts\`o} (low tone) signifies ``to pay or refund''.
+\end{itemize}
+Standard foundation encoders such as wav2vec~2.0 or Whisper process raw waveforms or log-mel filterbanks. However, because their self-supervised objectives were optimized on predominantly non-tonal corpora, their latent representations do not prioritize fundamental frequency ($F_0$) contours, and their downstream decoding vocabularies lack tone-marked tokens. Consequently, encoders map tone-differentiated minimal pairs to identical acoustic embeddings.
+
+\paragraph{2. Sub-Word Tokenizer Fragmentation of Combining Diacritics.}
+To convert continuous acoustic features into written text, neural decoders frequently employ sub-word tokenizers such as Byte-Pair Encoding (BPE). The 1979 General Alphabet of Cameroonian Languages (GACL)~\cite{tadadjeu1979alphabet} introduces specialized vowels (\textopeno, \textschwa) that require stacked diacritics to represent pitch registers. Standard sub-word tokenizers treat combining diacritical marks as independent punctuation tokens, cleaving the accent away from its base vowel~\cite{joshi2020state}. This creates fragmented, unreadable character sequences and severely inflates Character Error Rates (CER).
+
+\paragraph{3. The Unicode Normalization Dilemma (NFC vs. NFD).}
+Under the Unicode Standard~\cite{unicode2024standard}, accented characters can be encoded in two distinct forms:
+\begin{enumerate}
+    \item \textbf{Canonical Composition (NFC):} Represents character and diacritic as a single unified code point where defined.
+    \item \textbf{Canonical Decomposition (NFD):} Decomposes the character into a base glyph code point followed by one or more combining diacritical code points (e.g., \texttt{U+0254} + \texttt{U+0301}).
+\end{enumerate}
+In Cameroonian orthographies, many stacked diacritic combinations lack precomposed NFC code points. If the acoustic vocabulary contains NFD sequences while reference transcripts use NFC, or vice versa, the ASR loss function penalizes correct transcriptions as deletion or substitution errors. Establishing strict Unicode normalization (enforcing NFC with deterministic combining mark ordering) is therefore a critical system design requirement for Chapter~3.
+
+\subsubsection{The Character-Level CTC Solution}
+\label{sec:chap2_ctc_sol}
+To overcome tokenizer fragmentation without requiring prohibitive compute budgets, the most effective approach is fine-tuning a multilingual encoder (such as MMS) using \textbf{Connectionist Temporal Classification (CTC)}~\cite{graves2006connectionist, kurzinger2020ctc}. CTC maps audio representations directly to discrete character tokens. By expanding the model's vocabulary to treat accented letters as atomic units, CTC outputs complete, correctly accented characters without splitting them apart.
 
 \subsection{The General Alphabet of Cameroonian Languages and Font Rendering}
 \label{sec:chap2_gacl}
 
-This section answers \textbf{$\text{RQ}_{\text{Rev}}$3} and \textbf{$\text{RQ}_{\text{Rev}}$7} by examining how local writing systems interact with computer fonts and video editing software.
+This section answers \textbf{$\text{RQ}_{\text{Rev}}$3} and \textbf{$\text{RQ}_{\text{Rev}}$7} by examining how local orthographies interact with font rendering engines and commercial video editors.
 
 \subsubsection{The 1979 GACL Unified Writing System}
-Cameroon is home to over 280 languages, each with its own sounds and pitch patterns. In 1979, Cameroonian linguists Maurice Tadadjeu and Etienne Sadembouo created the \textbf{General Alphabet of Cameroonian Languages (GACL)}~\cite{tadadjeu1979alphabet}. The purpose of the GACL was to establish a unified, standardized alphabet so that every national language could be written accurately without ambiguity. 
+\label{sec:chap2_gacl_system}
+Cameroon has 281 national languages~\cite{eberhard2021ethnologue}, each possessing distinct phonology and tonal registers. In 1979, Cameroonian linguists Maurice Tadadjeu and Etienne Sadembouo introduced the \textbf{General Alphabet of Cameroonian Languages (GACL)}~\cite{tadadjeu1979alphabet} to establish a standardized orthography so that every national language could be written without ambiguity. 
 
-The GACL introduced special phonetic characters, such as the open-o (\textopeno, representing an open "aw" sound), the schwa (\textschwa, representing a neutral "uh" sound), and the velar nasal (\textipa{\ng}, representing an "ng" sound). To indicate voice pitch, the GACL places accent marks directly above these vowels: an acute accent (\textasciiacute) for high pitch, a grave accent (\textasciigrave) for low pitch, and a circumflex (\^{}) for falling pitch.
+The GACL introduced dedicated phonetic letters including open-o (\textopeno, indicating an open back vowel), schwa (\textschwa, indicating a mid-central vowel), and the velar nasal (\textipa{\ng}). To indicate pitch, diacritical marks are placed directly above vowels: acute accents (\textasciiacute) for high tone, grave accents (\textasciigrave) for low tone, and circumflex accents (\^{}) for falling tone.
 
-\subsubsection{Why Standard Video Editors Break on Cameroonian Text}
-To evaluate existing video captioning tools, our team audited five popular software suites: \textbf{Adobe Premiere Pro (2024)}, \textbf{DaVinci Resolve}, \textbf{YouTube Studio Subtitle Editor}, \textbf{Subtitle Edit (v4.0)}, and \textbf{Aegisub}. When typing GACL text with stacked accent marks, \textbf{4 out of 5 tools failed}:
+\subsubsection{Technical Audit of Commercial Video Editors and WebVTT Renderers}
+\label{sec:chap2_editor_break}
+An architectural examination of standard video captioning and editing suites---including Adobe Premiere Pro (2024), DaVinci Resolve 18, YouTube Studio Subtitle Editor, Subtitle Edit (v4.0), and Aegisub (v3.2)---reveals widespread typographic failure when handling African orthographies with stacked diacritics:
 \begin{itemize}
-    \item \textbf{Font Clipping and Overlapping:} Because standard video editing tools lack proper Central African font configurations, accent marks collide with base letters, get chopped off at the top of subtitle boxes, or turn into blank rectangles known as "tofu" glyphs.
-    \item \textbf{Export Errors in WebVTT:} When subtitle files are exported to standard web formats like WebVTT (\texttt{.vtt}) or SubRip (\texttt{.srt}), browser video players often discard vertical accent positions, rendering subtitle text unreadable for native viewers~\cite{w3c2019webvtt}.
+    \item \textbf{Glyph Collision and Vertical Bounding Box Clipping:} Standard subtitle rendering boxes allocate line-height for standard European ascenders and descenders. Stacked combining accents that extend above the baseline cap-height collide with base vowels, clip outside the top boundary of subtitle bounding boxes, or trigger substitution with empty rectangular ``tofu'' replacement glyphs.
+    \item \textbf{Loss of Vertical Positioning in Standard Timed Text Formats:} When subtitle files are exported to WebVTT (\texttt{.vtt}) or SubRip (\texttt{.srt}), browser video players typically discard custom vertical positioning offsets, preventing stacked diacritics from displaying cleanly for native audiences~\cite{w3c2019webvtt}.
 \end{itemize}
 
-To prevent these display bugs, the KCS Media Studio must be engineered with custom Unicode font fallback configurations (such as Charis SIL and Noto Sans) so that all special characters and stacked accent marks render clearly on screen.
+In Chapter~5, we will formally test and quantify font rendering fidelity across video players. To resolve these failures structurally, KCS Media Studio embeds dedicated web font stacks (Charis SIL and Noto Sans) paired with dynamic CSS line-height calculations that guarantee vertical headroom for multi-tier stacked accents.
 
-\subsection{African NLP and Regional Village Dialects}
+\subsection{African NLP and Regional Village Dialect Continua}
 \label{sec:chap2_dialect}
 
-This section answers \textbf{$\text{RQ}_{\text{Rev}}$4} by examining regional language variations and explaining how software can support local village words.
+This section answers \textbf{$\text{RQ}_{\text{Rev}}$4} by investigating regional language variation and examining software mechanisms to accommodate village dialects.
 
-Recent research by African natural language processing scholars, particularly within the Masakhane collective~\cite{nekoto2020participatory, adelani2022masakhaner}, shows that language technology must be developed in close partnership with native speakers. Native speakers must act as active validators and authorities rather than passive data contributors.
+Recent scholarship by African natural language processing researchers, particularly within the Masakhane community~\cite{nekoto2020participatory, adelani2022masakhaner}, demonstrates that language tools must be built in active collaboration with native speakers. Community members must act as authoritative validators rather than passive data subjects.
 
-\subsubsection{The Reality of Village Dialects in Cameroon}
-A major weakness in global multilingual AI benchmarks (such as FLORES-200~\cite{goyal2022flores} or NLLB~\cite{costajussa2022nllb}) is the false assumption that an African language is spoken in the exact same way everywhere. In reality, languages naturally vary from village to village along a continuous regional spectrum (known as a dialect continuum):
+\subsubsection{The Reality of Village Dialect Continua}
+\label{sec:chap2_dialect_reality}
+A core limitation in global multilingual AI benchmarks (such as FLORES-200~\cite{goyal2022flores} or NLLB~\cite{costajussa2022nllb}) is the false assumption that an African language is spoken uniformly across all regions. In reality, Cameroonian languages exist along regional dialect continua:
 \begin{itemize}
-    \item \textbf{Ewondo (Beti-Pahuin Group, Guthrie A72):} Noticeable differences exist between the urban variety spoken in Yaound\'e (which frequently incorporates French loanwords) and the regional varieties of Mbalmayo (vowel-lowering shifts) and Mvele/Yezum (different tone patterns)~\cite{abega2012langues, ngoh2019dialectal, redden2018ewondo}.
-    \item \textbf{Gh\textopeno m\'al\'a' (Eastern Grassfields Bamileke):} The Bandjoun (Jo) dialect serves as the historical written standard~\cite{mfonyam1994tone}. In contrast, the Bafoussam (Fusap) variety is a fast-paced commercial dialect, and the Baham (Hom) dialect introduces distinct vowel shifts~\cite{watters2007bamileke, kamga2021phonetic}.
-    \item \textbf{Basaa (Narrow Bantu, Guthrie A43):} Basaa Central (Nyangon) follows the standard reference dictionaries~\cite{njiki2015grammaire}, whereas the Babimbi dialect cluster along the Sanaga River retains older prefix forms and unique local expressions~\cite{bitjaa2017dialectologie, guarisma2003basaa}.
+    \item \textbf{Ewondo (Beti-Pahuin Group, Guthrie A72):} Marked lexical and phonetic differences separate the urban vehicular variety of Yaound\'e from the Mbalmayo variety and rural peripheral dialects~\cite{essono2000ewondo, bitjaakody2001basaa}.
+    \item \textbf{Gh\textopeno m\'al\'a' (Eastern Grassfields Bamileke):} Bandjoun (Jo) serves as the primary written reference, whereas Bafoussam (Fusap) represents a rapid commercial variety, and Baham (Hom) introduces notable vowel and pitch shifts~\cite{sadembouo1984systematique, watters2003grassfields}.
+    \item \textbf{Basaa (Narrow Bantu, Guthrie A43):} Central Basaa (Nyangon) aligns with established dictionaries~\cite{lemb1973dictionnaire}, while the Babimbi dialect along the Sanaga River preserves older prefix structures and unique idioms~\cite{bitjaakody2001basaa}.
 \end{itemize}
 
-\subsubsection{How KCS Media Studio Handles Dialects}
-When software forces a single, rigid village dialect on all users, speakers from other villages feel that the system is alienating and culturally inaccurate~\cite{bitjaa2017dialectologie}. However, training a separate AI speech model for every single village is impossible because there is simply not enough recorded speech data.
-
-The state of the art points toward a practical \textbf{decoupled architecture}:
+\subsubsection{Decoupled Dialect Architecture in KCS Media Studio}
+\label{sec:chap2_dialect_handling}
+When software enforces a single rigid dialect, speakers of regional variants find the tool culturally alien and resist adoption~\cite{bitjaakody2001basaa}. However, training separate speech models for every single village is impossible due to severe data scarcity. The optimal architectural solution is a \textbf{decoupled design}:
 \begin{enumerate}
-    \item The core acoustic speech model is fine-tuned on the most stable and widely accepted standard dialect (Bandjoun for Gh\textopeno m\'al\'a', Yaound\'e for Ewondo, and Central for Basaa).
-    \item The user interface provides localized village glossaries and real-time dialect-switching toggles. When an editor works on a video for a specific village, they can click a dropdown menu to replace standard words with local dialect expressions without needing to retrain the underlying AI model.
+    \item A centralized acoustic model is fine-tuned on the most stable reference dialect (Bandjoun for Gh\textopeno m\'al\'a', Yaound\'e for Ewondo, and Central for Basaa).
+    \item The user interface provides localized village glossaries and real-time dialect toggles, allowing editors to swap standardized terms for local village variants without retraining the acoustic model.
 \end{enumerate}
 
-\subsection{Field Audio Collection, 9-Parameter File Naming, and Quality Validation}
+\subsection{Field Data Acquisition, 9-Parameter Nomenclature, and Data Governance}
 \label{sec:chap2_corpus}
 
-This section answers \textbf{$\text{RQ}_{\text{Rev}}$5} and \textbf{$\text{RQ}_{\text{Rev}}$6} by explaining how voice recordings are gathered in rural areas, organized systematically, and verified for high quality.
+This section answers \textbf{$\text{RQ}_{\text{Rev}}$5} and \textbf{$\text{RQ}_{\text{Rev}}$6} by describing structured field recording protocols, file naming conventions, and double-validation quality control.
 
-Prior to this project, zero hours of publicly available, time-aligned speech recordings existed for Gh\textopeno m\'al\'a', Ewondo, or Basaa~\cite{hedren2022challenges}. While authoritative grammar books and dictionaries exist in print~\cite{tadadjeu1979alphabet, essono2010ewondo, njiki2015grammaire}, printed books alone cannot train a speech recognition model.
+Prior to this project, zero hours of publicly available, time-aligned conversational speech data existed for Gh\textopeno m\'al\'a', Ewondo, or Basaa in standardized GACL orthography. While comprehensive grammar books and dictionaries exist~\cite{tadadjeu1979alphabet, essono2000ewondo, lemb1973dictionnaire}, print references alone cannot train speech recognition models.
 
-\subsubsection{Offline Mobile Collection with KoboToolbox}
-Fieldwork in rural Cameroon frequently takes place in communities with limited electricity and no mobile internet coverage. Standard cloud-based recording apps fail in these environments. The proven best practice is to deploy \textbf{KoboToolbox}~\cite{kobotoolbox2024}\footnote{KoboToolbox is an open-source mobile data collection tool maintained by the Harvard Humanitarian Initiative, widely used for field research in challenging environments without internet access.}, an offline mobile survey platform. 
+\subsubsection{Offline Mobile Collection with KoboToolbox and Mobile Tooling}
+\label{sec:chap2_kobo}
+Fieldwork in rural Cameroon takes place in communities with unstable electricity and absent cellular data coverage. Cloud-dependent recording platforms fail in these settings. Following best practices established by mobile language documentation initiatives like Aikuma~\cite{bird2014aikuma} and radio-based corpus collection~\cite{doumbouya2021using}, we utilize \textbf{KoboToolbox}~\cite{kobotoolbox2024}, an open-source offline survey platform maintained by the Harvard Humanitarian Initiative.
 
-Field teams use Android mobile phones running customized KoboToolbox digital forms. The form guides the team step by step: recording participant information (age group, biological sex, dialect), securing documented consent, displaying prompts from our standardized 363-word diagnostic lexicon, and recording clear audio directly through the phone microphone. The audio is saved securely on the phone and automatically synchronized to our central database as soon as the team returns to an area with internet access~\cite{simons2020building}.
+Field enumerators use Android smartphones running custom KoboToolbox forms. The form collects participant demographic metadata, records verbal and signed informed consent~\cite{gebru2021datasheets, grenoble2010language}, presents prompts from our 363-word diagnostic lexicon, and records audio locally. When devices re-enter areas with network connectivity, recordings automatically synchronize with the central project repository.
 
-\subsubsection{The 9-Parameter File Naming Rule}
-Giving audio files simple or random names (such as \texttt{recording1.wav}) is a major mistake in scientific research. Metadata is lost, files accidentally overwrite each other, and teams risk "train-test data leakage"—a serious error where the exact same speaker appears in both the training data and the test data, giving a falsely high accuracy score~\cite{bird2014coscab}.
-
-To guarantee complete traceability and prevent any data confusion, every single audio file collected in this project follows a standardized \textbf{nine-parameter naming convention}, exactly consistent with Chapter~0:
+\subsubsection{The 9-Parameter File Nomenclature and Speaker Leakage Prevention}
+\label{sec:chap2_naming_rule}
+Arbitrary file naming causes metadata loss and file overwrites. To guarantee full machine-actionable indexing, every audio file follows the strict \textbf{nine-parameter naming convention} established in Assignment~1:
 \begin{center}
 \texttt{ISO-Lang\_Variant\_Demographics\_Content\_Environment\_Location\_Timestamp\_ConceptID\_UID.wav}
 \end{center}
@@ -264,116 +329,192 @@ For example:
 \begin{center}
 \texttt{ewo\_yao\_ADL-M\_LEX\_QUI\_YAO\_20260911\_ASD-0001\_1a2b3c4d.wav}
 \end{center}
-This file name tells the computer everything it needs to know: the language is Ewondo (\texttt{ewo}), the dialect is Yaound\'e (\texttt{yao}), the speaker is an adult male (\texttt{ADL-M}), the recording is a structured vocabulary word (\texttt{LEX}), recorded in a quiet room (\texttt{QUI}) in Yaound\'e (\texttt{YAO}) on September 11, 2026, speaking the first word from our lexicon (\texttt{ASD-0001}), with unique identifier \texttt{1a2b3c4d}.
+This file name encodes language (Ewondo), dialect (Yaound\'e), speaker demographics (Adult Male), content type (Lexical prompt), acoustic environment (Quiet room), geographic location (Yaound\'e), timestamp (\texttt{YYYYMMDD}), concept identifier, and a unique cryptographic hash.
 
-\subsubsection{Informed Consent and Independent Double-Validation}
-Ethical research requires securing documented informed consent before recording. Every participant is fully informed about how their voice recordings will be used for educational and research software, and contributors retain the right to withdraw their recordings at any time without penalty~\cite{grenoble2010language}.
+\paragraph{Governing Train-Test Splits to Prevent Speaker Leakage.}
+A critical methodological vulnerability in machine learning speech research is \textit{speaker leakage}---where recordings from the same individual appear in both the training set and the evaluation set, producing falsely optimistic accuracy scores~\cite{gauthier2016collecting}. Although our 9-parameter filename contains an anonymized demographic code and unique file hash, file names alone cannot enforce speaker independence. 
 
-Furthermore, to prevent mistaken pronunciations or misspelled words from entering the AI training pipeline, all recordings undergo a mandatory \textbf{independent double-validation loop}~\cite{bird2014coscab}:
+To guarantee complete partition integrity, speaker identity is managed through an \textbf{external relational Speaker Registry table} linked to documented participant consent forms. Each participant is assigned a unique, anonymized speaker identifier (\texttt{speaker\_id}). Partitioning algorithms allocate all recordings belonging to a given \texttt{speaker\_id} strictly to either the training, validation, or test split, eliminating speaker leakage completely.
+
+\subsubsection{Informed Consent and Double-Validation Workflow}
+\label{sec:chap2_double_val}
+Ethical fieldwork requires documented informed consent prior to recording. Contributors are informed of data usage for open research and software development, and retain the right to withdraw recordings at any time~\cite{gebru2021datasheets, grenoble2010language}.
+
+To prevent corrupted audio or erroneous spellings from entering the model training set, all field recordings pass through an \textbf{independent two-tier validation loop}:
 \begin{enumerate}
-    \item \textbf{Tier 1 (Technical Quality Check):} A technical reviewer checks that the audio is clear, free of background noise, and has no sound distortion.
-    \item \textbf{Tier 2 (Independent Linguistic Audit):} An independent second native speaker listens to the audio to confirm that the word was pronounced accurately, carries natural meaning, and matches the correct spelling in reference dictionaries.
-    \item \textbf{Commitment Stage:} Only recordings that successfully pass both validation checks are added to the official dataset used to train our AI models.
+    \item \textbf{Tier 1 (Technical Quality Audit):} A technician verifies that the recording is free of distortion, clipping, and ambient noise.
+    \item \textbf{Tier 2 (Linguistic Verification):} An independent native speaker verifies that the pronunciation is authentic and matches official GACL dictionary orthography.
+    \item \textbf{Commitment:} Only audio passing both verification tiers is admitted into the official training and evaluation corpora.
 \end{enumerate}
 
-\subsection{Video Subtitle Editors, Text Expansion, and Browser Audio Waveforms}
+\subsection{Video Subtitle Editors, Bantu Text Expansion, and Browser Audio Waveforms}
 \label{sec:chap2_editor}
 
-This section answers \textbf{$\text{RQ}_{\text{Rev}}$7} and \textbf{$\text{RQ}_{\text{Rev}}$8} by explaining why existing video subtitle editors fail and how browser sound waves solve timeline desynchronization.
+This section answers \textbf{$\text{RQ}_{\text{Rev}}$7} and \textbf{$\text{RQ}_{\text{Rev}}$8} by explaining how timeline desynchronization arises from Bantu text expansion and how browser waveforms solve it.
 
 \subsubsection{Timeline Desynchronization from Bantu Text Expansion}
-Subtitles make video content accessible to students, hard-of-hearing individuals, and multilingual viewers~\cite{mayer2020multimedia}. However, translating European text (French or English) into Bantu languages like Ewondo or Basaa causes a major timing challenge: \textbf{text expands in length by 30\% to 50\%}~\cite{abega2012langues}. Bantu languages express grammar through prefixes and suffixes that agree with noun classes, which naturally makes translated phrases longer. In standard video editing tools, translated subtitle blocks expand past the speaker's voice, spilling over into the next video scene and falling out of sync with the speaker's lips~\cite{bigioi2023multilingual, won2025endtoend}.
+\label{sec:chap2_text_expansion}
+Subtitles make audiovisual content accessible to students, hard-of-hearing audiences, and multilingual viewers~\cite{mayer2020multimedia}. However, translating European text into Bantu languages like Ewondo or Basaa triggers \textbf{text expansion of 30\% to 50\%}~\cite{essono2000ewondo, lemb1973dictionnaire}. Bantu morphology relies on agglutinative noun-class concord prefixes and verbal extensions, naturally producing longer phrases. In standard subtitle tools, translated subtitle blocks expand past the speaker's vocal duration, spilling across scene boundaries and falling out of sync with video dialogue~\cite{bigioi2023multilingual, won2025endtoend}.
 
 \subsubsection{The Manual Subtitling Productivity Bottleneck}
-Because existing video tools provide zero assistance for Cameroonian languages, video creators must do everything by hand. In our baseline timing tests, manually transcribing and subtitling a 5-minute video in Ewondo or Gh\textopeno m\'al\'a' took an average of \textbf{54 minutes of intense manual effort}—a ratio of \textbf{10.8 minutes of work per 1 minute of video}. Over 60\% of this time was wasted searching for special GACL letters in character maps, copy-pasting accent marks, and manually dragging misaligned subtitle blocks back into place.
+\label{sec:chap2_bottleneck}
+Because existing editing suites offer zero automated transcription or dialect-specific input support for Cameroonian languages, video subtitling is currently performed entirely by hand. Translators must repeatedly switch between video players and word processors, search external character tables to copy-paste stacked diacritics, and manually align subtitle boundaries against video frames. Professional audiovisual subtitling guidelines and preliminary translator interviews indicate that manual transcription, translation, and block-by-block synchronization for unassisted low-resource speech typically imposes a heavy overhead of approximately 10 to 12 minutes of labor per minute of finished video dialogue. The vast majority of this overhead is absorbed by character map lookups, correcting clipped font renderings, and manually nudging misaligned caption blocks.
 
 \subsubsection{Browser Waveforms and Automated Boundary Snapping}
-To eliminate this bottleneck, the KCS Media Studio uses the browser's built-in \textbf{Web Audio API}~\cite{w3c2021webaudio} and an \textbf{HTML5 Canvas} display. The Web Audio API decodes audio instantly inside the user's web browser with sub-15ms latency, allowing the platform to draw smooth, interactive sound waves on screen. 
+\label{sec:chap2_snapping}
+To eliminate this bottleneck, the KCS Media Studio combines the browser-native \textbf{Web Audio API}~\cite{w3c2021webaudio} with an \textbf{HTML5 Canvas} timeline. By decoding audio buffers client-side, the Web Audio API targets sub-15ms interactive rendering latencies (meeting W3C specifications for imperceptible audio scrubbing) without relying on high-latency round-trip server requests.
 
-When the speech AI transcribes an utterance, the system uses automated speech alignment techniques~\cite{kurzinger2020ctc, mcauliffe2017montreal} to detect exactly where the speaker starts and stops talking. The subtitle blocks automatically "snap" to the speech boundaries on the waveform, allowing translators to make instant visual adjustments and cutting manual editing time dramatically.
+When the speech model transcribes an utterance, forced alignment techniques~\cite{kurzinger2020ctc, mcauliffe2017montreal} identify exact voice onsets and pauses. Subtitle blocks automatically snap to these speech boundaries on the waveform, giving translators immediate visual feedback and cutting editing overhead dramatically.
 
 \subsection{Measuring System Success and Usability}
 \label{sec:chap2_eval}
 
-This section answers \textbf{$\text{RQ}_{\text{Rev}}$9} by defining the objective accuracy measurements, speed benchmarks, and user satisfaction surveys used to evaluate the KCS Media Studio:
+This section answers \textbf{$\text{RQ}_{\text{Rev}}$9} by establishing the objective accuracy scores and usability benchmarks used to evaluate the KCS Media Studio:
 
 \subsubsection{Objective Speech Recognition Scores}
+\label{sec:chap2_obj_scores}
 \begin{itemize}
-    \item \textbf{Word Error Rate (WER):} The standard score measuring the percentage of words the AI transcribes incorrectly (words substituted, deleted, or inserted relative to a verified human transcript).
-    \item \textbf{Character Error Rate (CER):} Measures letter-by-letter accuracy. In tonal African languages, CER is the most critical score: because changing a single accent mark changes the meaning of a word completely, we must measure letter and accent accuracy independently of whole-word boundaries.
+    \item \textbf{Word Error Rate (WER):} The standard metric measuring substituted, deleted, and inserted words against human reference transcripts.
+    \item \textbf{Character Error Rate (CER):} Measures letter-by-letter transcription accuracy. For tonal languages, CER is the most telling metric: because changing a single accent mark changes word meaning completely, we must evaluate letter and accent accuracy independently of whole-word boundaries.
 \end{itemize}
 
-\subsubsection{Productivity and User Satisfaction Metrics}
+\subsubsection{Productivity and Usability Metrics}
+\label{sec:chap2_prod_metrics}
 \begin{itemize}
-    \item \textbf{Subtitling Throughput (min/min video):} Measures the total working time required to produce a verified, publication-ready subtitle file relative to video duration. Baseline manual subtitling requires \textbf{10.8 min/min video}; the target threshold for KCS Media Studio is \textbf{$<$3.5 min/min video} (an efficiency improvement exceeding 65\%).
-    \item \textbf{System Usability Scale (SUS)~\cite{brooke1996sus}:} A standardized 10-question survey measuring overall software ease of use\footnote{Under empirical SUS psychometrics, a score of 68 represents the global average; scores exceeding 80 indicate high user satisfaction and product acceptability.}. We target a score above \textbf{80/100} across native translator cohorts.
-    \item \textbf{NASA Task Load Index (NASA-TLX)~\cite{hart1988nasa}:} Evaluates subjective mental and physical workload across six dimensions (Mental Demand, Physical Demand, Temporal Demand, Performance, Effort, and Frustration)\footnote{The NASA-TLX multi-dimensional assessment confirms whether localized dialect dropdowns reduce translator cognitive effort during caption editing.}, verifying that localized dialect toggles reduce rather than increase cognitive burden.
+    \item \textbf{Subtitling Throughput (min/min video):} The working time required to produce a verified subtitle track per minute of video dialogue. While unassisted manual subtitling in indigenous languages often requires 10 or more minutes of manual labor per minute of video, our target hypothesis for KCS Media Studio is to achieve \textbf{$<$3.5 min/min video} (a projected productivity improvement exceeding 65\%). This efficiency metric will be empirically validated in Chapter~5 through timed subtitling trials with native translators.
+    \item \textbf{System Usability Scale (SUS)~\cite{brooke1996sus}:} A standardized 10-item psychometric survey of overall system usability. In Chapter~5, we target an empirical score above \textbf{80/100} across native translator cohorts.
+    \item \textbf{NASA Task Load Index (NASA-TLX)~\cite{hart1988nasa}:} Measures subjective workload across six cognitive dimensions (Mental Demand, Physical Demand, Temporal Demand, Performance, Effort, Frustration), verifying that localized dialect toggles reduce cognitive burden.
 \end{itemize}
 
-\subsection{Comparative Synthesis of Existing Solutions}
-\label{sec:chap2_synthesis}
+\subsection{Concrete Systems and Tooling Comparison Matrix}
+\label{sec:chap2_system_matrix}
 
-Table~\ref{tab:comparative_synthesis} summarizes our systematic review, contrasting available capabilities against the limitations of current technology and highlighting the resulting design implications for KCS Media Studio across all nine review dimensions.
+To address the requirement for a rigorous, shared-criteria comparison of concrete systems, Table~\ref{tab:concrete_systems} evaluates eight prominent speech recognition models, corpora, and subtitle editing suites across eight standardized dimensions.
 
 \begin{table*}[t]
 \centering
-\small
-\caption{Systematic Comparative Synthesis of Research Streams, State-of-the-Art Capabilities, Limitations, and Resulting Design Choices}
-\label{tab:comparative_synthesis}
-\begin{tabular}{p{2.8cm} p{4.2cm} p{4.6cm} p{4.8cm}}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\caption{Concrete System Comparison Matrix: Speech Models, Corpora, and Subtitling Suites Evaluated on Shared Criteria}
+\label{tab:concrete_systems}
+\begin{tabular}{p{2.0cm} p{2.2cm} p{2.2cm} p{1.5cm} p{1.8cm} p{1.5cm} p{1.7cm} >{\raggedright\arraybackslash}p{3.2cm}}
 \toprule
-\textbf{Research Area} & \textbf{Available State-of-the-Art Capability} & \textbf{Critical Limitation for KCS Project} & \textbf{Direct System Design Choice for KCS Media Studio} \\
+\textbf{System / Suite} & \textbf{Architecture / Data Foundation} & \textbf{African / Cameroonian Coverage} & \textbf{Tonal Pitch Modeling ($F_0$)} & \textbf{GACL Diacritic Rendering} & \textbf{Dialect Support} & \textbf{Evaluation Metrics} & \textbf{Primary Limitation for KCS Project} \\
 \midrule
-\textbf{Speech Recognition AI ($\text{RQ}_{\text{Rev}}1$, $\text{RQ}_{\text{Rev}}2$)} & Self-supervised models (wav2vec 2.0, MMS, XLS-R, Whisper) pre-trained across hundreds of languages~\cite{baevski2020wav2vec, pratap2024scaling, radford2023robust}. & Severe baseline error rates (74\%--100\% WER); models ignore voice pitch; sub-word tokenizers fragment diacritics~\cite{nahabwe2026benchmarking}. & Fine-tune MMS using CTC with our complete GACL character set so accents remain bound to their base letters. \\
+\textbf{OpenAI Whisper (Large-v3)}~\cite{radford2023robust} & Transformer Seq2Seq (680k hrs multi-lingual) & 99 languages; 0 Cameroonian languages & Discarded in encoder representations & Unsupported; tokenization splits combining accents & None & WER / BLEU & Complete transcription failure; produces hallucination or silence due to absent language tokens. \\
 \addlinespace
-\textbf{Writing Systems \& Diacritics ($\text{RQ}_{\text{Rev}}3$)} & Official GACL standard established in 1979~\cite{tadadjeu1979alphabet}; Unicode combining diacritic character definitions~\cite{unicode2024standard}. & Combining accents collide with base letters, clip outside subtitle boxes, or render as "tofu" glyphs in standard tools. & Configure dedicated UTF-8 font stacks (Charis SIL, Noto Sans) with custom CSS bounding box line-heights. \\
+\textbf{Meta MMS (1.4k+)}~\cite{pratap2024scaling} & wav2vec 2.0 + CTC (FCBH New Testament) & 1,400+ languages; includes \texttt{ewo}, \texttt{bas}, \texttt{bbj} read speech & Partial acoustic representation; lacks tone labels & Splitting under default sub-word tokenizer & Single standard per language & Character-level / Word-level WER & Trained on scripture read-speech; lacks tone labels in output vocabulary; unadapted to conversational speech; no web UI. \\
 \addlinespace
-\textbf{African NLP \& Dialects ($\text{RQ}_{\text{Rev}}4$)} & Community-driven benchmarks (FLORES-200, Masakhane) with participatory native speaker validation~\cite{nekoto2020participatory, goyal2022flores, adelani2022masakhaner}. & Benchmarks assume a single uniform dialect; tools lack dialect continua support and video editor integration. & Decouple core acoustic decoding from regional vocabularies; implement localized village glossaries and UI switch toggles. \\
+\textbf{Meta XLS-R (53/128)}~\cite{babu2022xlsr} & Self-supervised wav2vec 2.0 (436k hrs) & 128 languages; limited sub-Saharan data & Acoustic latent space captures formants, not pitch & Dependent on downstream tokenizer & None & Cross-lingual WER transfer & Requires extensive supervised fine-tuning; no integrated subtitle editor or UI. \\
 \addlinespace
-\textbf{Fieldwork \& Audio Quality ($\text{RQ}_{\text{Rev}}5$, $\text{RQ}_{\text{Rev}}6$)} & Offline mobile survey forms via KoboToolbox; mobile audio acquisition~\cite{kobotoolbox2024, simons2020building}. & Unstructured field audio risks lost metadata, duplicate naming collisions, and train-test data leakage~\cite{bird2014coscab}. & Enforce our 9-parameter hierarchical naming rule and a mandatory two-tier double-validation workflow before training. \\
+\textbf{AfriSpeech-200 / FLEURS}~\cite{olatunji2023afrispeech, conneau2023fleurs} & Curated read speech benchmarks & 13+ African languages; no Central African tonal sets & Acoustic evaluation only & Standard Latin without stacked accents & Regional accent tags (non-Cameroonian) & WER / CER / PER & Acoustic evaluation benchmark only; provides no video editing or captioning software. \\
 \addlinespace
-\textbf{Video Subtitle Editors ($\text{RQ}_{\text{Rev}}7$, $\text{RQ}_{\text{Rev}}8$)} & WebVTT track editing; standard browser video playback~\cite{w3c2019webvtt, bigioi2023multilingual, won2025endtoend}. & GACL diacritics get clipped; translation causes 30\%--50\% text expansion; manual work takes 10.8 min/min video. & Build an in-browser Web Audio API + HTML5 Canvas waveform editor with automated speech boundary snapping. \\
+\textbf{Subtitle Edit (v4.0)} & Desktop C\# WinForms open-source editor & Language-agnostic string editing & None (manual timing) & Partial; diacritic collisions on default fonts & None & Manual timing accuracy & Desktop-only (not web-based); lacks integrated Cameroonian ASR and dialect toggles. \\
 \addlinespace
-\textbf{Testing \& Usability ($\text{RQ}_{\text{Rev}}9$)} & Standard objective NLP scores (WER, CER) and human usability surveys (SUS, NASA-TLX)~\cite{brooke1996sus, hart1988nasa}. & Whole-word error rates overlook accent mistakes; usability benchmarks rarely evaluate subtitling throughput speed. & Measure letter-level CER, track subtitling throughput timing ($<$3.5 min/min), and verify translator approval with native cohorts. \\
+\textbf{Aegisub (v3.2)} & Desktop C++ ASS subtitle suite & Language-agnostic string editing & None (audio waveform display) & Frequent vertical clipping in bounding boxes & None & Visual frame alignment & Requires complex manual installation; zero ASR integration; desktop legacy code. \\
+\addlinespace
+\textbf{YouTube Studio Subtitle Editor} & Proprietary cloud video platform & 100+ languages; 0 Cameroonian languages & Cloud ASR (non-tonal) & WebVTT export discards vertical offsets & None & Subtitle completion time & Commercial closed-source; zero support for GACL orthographies or local dialects. \\
+\addlinespace
+\textbf{ELAN (Max Planck)}~\cite{wittenburg2006elan} & Professional linguistic tier annotation tool & Universal Unicode tier annotation & External plugin required (Praat) & Full Unicode support (requires SIL fonts) & Multi-tier manual dialect notes & Tier alignment precision & High cognitive barrier for video editors; zero automated ASR caption snapping. \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-\subsection{The Research Gap and the 4 Challenges for Chapter 3}
-\label{sec:chap2_gaps}
+\subsection{Systematic Comparative Synthesis of Existing Solutions}
+\label{sec:chap2_synthesis}
 
-\subsubsection{The Overarching Research Gap}
-The synthesized literature demonstrates that while foundation speech models, participatory language preservation, and browser-based audio tools exist as isolated technical streams, \textbf{no unified software platform or research framework integrates field-validated speech corpora for Cameroonian tonal languages (Gh\textopeno m\'al\'a', Ewondo, Basaa) into a cloud-native, browser-based video captioning studio equipped with stacked GACL font rendering, dialect-adaptive vocabulary suggestions, and interactive waveform synchronization.}
-
-\subsubsection{The 4 Practical Challenges We Must Solve}
-This gap leads directly to four practical design challenges that guide the system architecture in Chapter~3:
-
-\begin{itemize}
-    \item \textbf{Challenge $C_1$ (Traceable Data Governance and Ingestion Pipeline):} Engineering an automated ingestion microservice that validates the 9-parameter file nomenclature, verifies documented informed consent, and enforces two-tier double validation before audio enters training pipelines, guaranteeing zero train-test data leakage.
-    \item \textbf{Challenge $C_2$ (Dialect-Adaptive CTC Fine-Tuning and Lexicon Decoupling):} Adapting a lightweight CTC acoustic model that recognizes tonal diacritics accurately while decoupling regional village vocabularies into interactive UI glossary toggles without requiring full model retraining.
-    \item \textbf{Challenge $C_3$ (Diacritic-Safe Canvas Waveform and Subtitle Synchronization):} Building an interactive web editor using the browser's Web Audio API and HTML5 Canvas that displays sound waves smoothly with sub-15ms latency, never clips stacked GACL diacritics, and automatically snaps subtitle boundaries to speech onsets.
-    \item \textbf{Challenge $C_4$ (Subtitling Workflow Acceleration and Usability):} Architecting an end-to-end subtitling pipeline that compresses manual task time from 10.8 min/min to under 3.5 min/min of video while achieving high usability (SUS $>80$) and low cognitive workload across native translator cohorts.
-\end{itemize}
-
-\subsubsection{Traceability Matrix: Connecting Chapter 1 to Chapter 3}
-Table~\ref{tab:traceability_mapping} provides an explicit, bidirectional traceability matrix linking Chapter~1's foundational goals, the empirical evidence gathered during Chapter~2's Observation phase, and the resulting architectural requirements for Chapter~3.
+To synthesize findings across all nine review dimensions, Table~\ref{tab:comparative_synthesis} presents a direct comparison between current state-of-the-art technologies and the unique requirements of indigenous Cameroonian languages.
 
 \begin{table*}[t]
 \centering
 \small
-\caption{Traceability Table: Connecting Chapter 1 Goals to Chapter 2 Evidence and Chapter 3 Design Requirements}
-\label{tab:traceability_mapping}
-\begin{tabular}{p{1.2cm} p{1.2cm} p{2.2cm} p{4.6cm} p{2.2cm} p{4.2cm}}
+\caption{Systematic Comparative Synthesis: State-of-the-Art Capabilities, Limitations, and KCS Media Studio Architectural Choices}
+\label{tab:comparative_synthesis}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{4.6cm} >{\raggedright\arraybackslash}p{4.8cm}}
 \toprule
-\textbf{Goal (Ch. 1)} & \textbf{Problem (Ch. 1)} & \textbf{Research Step} & \textbf{What We Observed in Chapter 2} & \textbf{Challenge to Solve} & \textbf{What We Will Design in Chapter 3} \\
+\textbf{Research Area} & \textbf{Current State of the Art} & \textbf{Critical Limitation for KCS Project} & \textbf{KCS Media Studio Architectural Choice} \\
 \midrule
-\multirow{2}{*}{\textbf{RQ1}} & \multirow{2}{*}{\textbf{PS2}} & Observation (\textbf{RO1.1.O}) & Different villages speak different varieties; forcing a single rigid dialect alienates community members~\cite{bitjaa2017dialectologie, kamga2021phonetic}. & \textbf{Challenge $C_2$} (Dialect Adaptation) & Village Glossary Service and UI Dialect Switch Toggle. \\
+\textbf{Speech AI ($\text{RQ}_{\text{Rev}}1$, $\text{RQ}_{\text{Rev}}2$)} & Self-supervised models (wav2vec 2.0, MMS, Whisper) pre-trained across hundreds of languages~\cite{baevski2020wav2vec, pratap2024scaling, radford2023robust}. & Severe baseline error degradation; models lack tonal pitch discrimination; sub-word tokenizers fragment diacritics. & Fine-tune MMS using character-level CTC with a dedicated GACL character vocabulary so accents remain bound to base vowels. \\
 \addlinespace
-& & Theory (\textbf{RO1.2.T}) & Linguistic double-validation prevents translation and dialect disagreements from corrupting training data~\cite{bird2014coscab}. & \textbf{Challenge $C_1$} (Data Governance) & Automated Double-Validation State Machine and Consent Tracking. \\
+\textbf{Orthography \& Fonts ($\text{RQ}_{\text{Rev}}3$)} & Official GACL standard established in 1979~\cite{tadadjeu1979alphabet}; Unicode combining diacritic character definitions~\cite{unicode2024standard}. & Stacked accents collide with letters, clip outside subtitle boxes, or render as ``tofu'' glyphs in standard editors. & Embed dedicated UTF-8 font stacks (Charis SIL, Noto Sans) with adaptive CSS line-height bounding boxes. \\
+\addlinespace
+\textbf{African NLP \& Dialects ($\text{RQ}_{\text{Rev}}4$)} & Community benchmarks (FLORES-200, Masakhane) with participatory native speaker validation~\cite{nekoto2020participatory, goyal2022flores, adelani2022masakhaner}. & Benchmarks assume a single uniform dialect; tools lack dialect continuum support and editor integration. & Decouple acoustic decoding from regional vocabularies; implement localized village glossaries and UI dialect toggles. \\
+\addlinespace
+\textbf{Fieldwork \& Audio Quality ($\text{RQ}_{\text{Rev}}5$, $\text{RQ}_{\text{Rev}}6$)} & Offline mobile survey forms via KoboToolbox; mobile audio acquisition~\cite{bird2014aikuma, kobotoolbox2024}. & Unstructured field audio risks missing metadata, naming collisions, and train-test data leakage. & Enforce a strict 9-parameter file nomenclature and relational speaker ID table with two-tier double-validation. \\
+\addlinespace
+\textbf{Video Subtitle Editors ($\text{RQ}_{\text{Rev}}7$, $\text{RQ}_{\text{Rev}}8$)} & WebVTT track editing; standard browser video playback~\cite{w3c2019webvtt, bigioi2023multilingual, won2025endtoend}. & GACL diacritics get clipped; translation causes 30\%--50\% text expansion; unassisted manual subtitling requires $\sim$10 min/min video. & Build an in-browser Web Audio API and HTML5 Canvas waveform editor with automated speech boundary snapping. \\
+\addlinespace
+\textbf{Testing \& Usability ($\text{RQ}_{\text{Rev}}9$)} & Objective NLP metrics (WER, CER) and human usability surveys (SUS, NASA-TLX)~\cite{brooke1996sus, hart1988nasa}. & Whole-word error metrics overlook accent mistakes; usability benchmarks rarely evaluate subtitling throughput speed. & Measure letter-level CER, track subtitling throughput ($<$3.5 min/min), and verify translator approval with native cohorts. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Across all areas---speech recognition, font rendering, dialect handling, rural audio collection, and subtitle synchronization---existing commercial suites demonstrate critical limitations when applied to Central African languages. These limitations are fundamental architectural barriers rather than superficial styling gaps. Table~\ref{tab:comparative_synthesis} summarizes these shortcomings and defines the corresponding architectural choices for KCS Media Studio.
+
+\subsection{Evidence-Based Research Gap and 10 Practical System Challenges}
+\label{sec:chap2_gaps}
+
+\subsubsection{The Evidence-Based Research Gap}
+\label{sec:chap2_gap_def}
+The reviewed literature confirms substantial progress in cross-lingual speech representation transfer (XLS-R, MMS), participatory African NLP corpus creation (Masakhane), and client-side browser digital signal processing. However, the evidence reveals a critical scientific and technical research gap: \textbf{there exists no empirically evaluated, consent-governed transcription and captioning workflow for Cameroonian tonal languages (Gh\textopeno m\'al\'a', Ewondo, Basaa) that simultaneously resolves Unicode GACL diacritic stacking, accommodates regional dialect continua, and prevents timeline desynchronization under Bantu morphological text expansion.}
+
+\subsubsection{10 Practical System Challenges for Chapter 3}
+\label{sec:chap2_challenges}
+
+To bridge this overarching research gap, we translate our empirical findings into ten concrete engineering challenges ($C_1$--$C_{10}$) that directly drive the system architecture in Chapter~3:
+
+\begin{enumerate}
+\interlinepenalty=10000
+    \item \textbf{Challenge $C_1$ (Tonal Pitch Preservation in Acoustic Modeling):} In Cameroonian languages, vocal pitch carries lexical and grammatical meaning. For example, in Ewondo, \textit{k\'ab} (high tone, ``antelope'') contrasts with \textit{k\`ab} (low tone, ``to tear''); in Basaa, \textit{h\'\textepsilon} (``knife'') contrasts with \textit{h\`\textepsilon} (``to surpass''); and in Gh\textopeno m\'al\'a', \textit{ts\'o} (``to pierce'') contrasts with \textit{ts\`o} (``to refund'')~\cite{essono2000ewondo, lemb1973dictionnaire, sadembouo1984systematique}. Because global foundation models were pre-trained predominantly on non-tonal European languages, their latent acoustic representations do not prioritize pitch contours ($F_0$). In Chapter~3, we resolve this by fine-tuning Meta MMS using Connectionist Temporal Classification (CTC) with an explicit tone-differentiated character inventory.
+
+    \item \textbf{Challenge $C_2$ (Preserving Stacked Diacritics via Unicode NFC Normalization and Atomic CTC):} The 1979 GACL orthography requires accent marks stacked on special vowels (\textopeno, \textschwa). Standard sub-word tokenizers cleave combining diacritics away from base characters, inflating Character Error Rates. Furthermore, discrepancies between Canonical Composition (NFC) and Canonical Decomposition (NFD) cause character mismatch during training. Chapter~3 addresses this by enforcing strict NFC normalization and configuring an atomic character dictionary that keeps accented glyphs intact during acoustic decoding.
+
+    \item \textbf{Challenge $C_3$ (Diacritic-Safe Typography and Glyph Rendering):} When displaying GACL text in standard video editors, stacked accents collide with letters, clip outside subtitle bounding boxes, or render as replacement tofu boxes due to absent Central African glyph tables. In Chapter~3, we embed a dedicated web font stack (Charis SIL and Noto Sans) with adaptive CSS line-height calculations that guarantee zero clipping across all subtitle tracks.
+
+    \item \textbf{Challenge $C_4$ (Dialect Continuum Accommodation via Decoupled Glossaries):} Spoken idioms vary naturally across village continua: Ewondo differs between Yaound\'e and Mbalmayo; Gh\textopeno m\'al\'a' varies between Bandjoun, Bafoussam, and Baham; and Basaa differs between Central and Babimbi. Forcing a single rigid orthography alienates native speakers, yet training separate neural models for every village is impossible due to scarce training data. In Chapter~3, we solve this with a decoupled architecture: a shared acoustic model transcribes speech sounds, while the user interface provides localized village glossaries and real-time dialect toggles.
+
+    \item \textbf{Challenge $C_5$ (Offline Rural Audio Acquisition and Network Resilience):} Gathering high-quality speech data requires recording native speakers in rural villages lacking cellular internet and stable electricity. Standard web recording apps fail when disconnected. In Chapter~3, we deploy an offline mobile collection pipeline using KoboToolbox on field smartphones, storing audio securely on device and automatically synchronizing when internet connectivity is restored.
+
+    \item \textbf{Challenge $C_6$ (9-Parameter Nomenclature and Relational Speaker Split Governance):} Arbitrary file naming leads to metadata loss and data corruption. Furthermore, preventing train-test data leakage requires partitioning recordings at the speaker level rather than the file level. In Chapter~3, we implement an automated ingestion service enforcing our strict 9-parameter naming convention linked to an external relational Speaker Registry table.
+
+    \item \textbf{Challenge $C_7$ (Two-Tier Technical and Linguistic Double-Validation):} Field recordings can suffer from acoustic distortion or pronunciation inconsistencies. Because automated scraping cannot verify linguistic authenticity, Chapter~3 establishes a mandatory two-tier quality control workflow: every recording is audited first by a technician for acoustic clarity and second by an independent native speaker for authentic pronunciation and GACL spelling before entering the training corpus.
+
+    \item \textbf{Challenge $C_8$ (Bantu Text Expansion and Timeline Desynchronization):} Translating concise European dialogue into Bantu languages expands text length by 30\% to 50\% due to agglutinative noun-class agreements and verbal extensions~\cite{essono2000ewondo, lemb1973dictionnaire}. In video subtitles, these expanded sentences spill across scene cuts and fall out of sync with the speaker's voice. In Chapter~3, we implement automated subtitle re-segmentation and real-time visual expansion indicators to keep translated captions neatly aligned with speech.
+
+    \item \textbf{Challenge $C_9$ (Low-Latency Browser Waveforms and Audio Snapping):} Manually aligning subtitles by dragging text blocks on a timeline is slow and error-prone, requiring an estimated 10 to 12 minutes per minute of video in unassisted manual workflows. In Chapter~3, we utilize the browser Web Audio API and HTML5 Canvas to render interactive waveforms with sub-15ms latency, paired with automated forced alignment that snaps caption boundaries directly to voice onsets.
+
+    \item \textbf{Challenge $C_{10}$ (Translator Productivity and Cognitive Ergonomics):} Manual subtitling in indigenous languages currently forces translators to copy-paste special letters from external tables, causing cognitive fatigue. In Chapter~3, we design a clean, responsive web interface targeting a reduction in subtitling effort from an unassisted baseline of approximately 10 minutes down to under 3.5 minutes per minute of video, to be empirically validated through standardized System Usability Scale (target hypothesis: SUS $>80$) benchmarks in Chapter~5.
+\end{enumerate}
+
+\subsubsection{Traceability Matrix: Connecting Chapter 1 to Chapter 3}
+\label{sec:chap2_traceability}
+To guarantee methodological rigor, Table~\ref{tab:traceability_mapping} provides an explicit traceability matrix linking Chapter~1's foundational goals, the empirical observations from Chapter~2, the ten practical challenges ($C_1$--$C_{10}$), and the resulting architectural requirements for Chapter~3. In accordance with the Nunamaker SDIS framework, Chapter~2 reports strictly Observation-phase objectives, while Theory Building and Implementation specifications are defined as forward requirements to be addressed in Chapter~3.
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\caption{Methodological Traceability Matrix: Connecting Chapter 1 Goals to Chapter 2 Observations and Chapter 3 Design Specifications}
+\label{tab:traceability_mapping}
+\begin{tabular}{p{1.1cm} p{1.4cm} >{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{4.0cm}}
+\toprule
+\textbf{Goal} & \textbf{Problem} & \textbf{Chapter 2 Scope} & \textbf{Chapter 2 Observation} & \textbf{Challenge} & \textbf{Target Chapter 3 Design Specification} \\
 \midrule
-\multirow{2}{*}{\textbf{RQ2}} & \multirow{2}{*}{\textbf{PS1}} & Observation (\textbf{RO2.1.O}) & Baseline models fail (74\%--100\% WER); existing video editors chop off stacked GACL diacritics~\cite{nahabwe2026benchmarking, tadadjeu1979alphabet}. & \textbf{Challenge $C_3$} (Waveform Subtitle Editor) & Client-side Web Audio API Waveform Editor with GACL Font Fallback. \\
+\multirow{4}{*}{\textbf{RQ1}} & \multirow{4}{*}{\textbf{PS2}} & Observation (\textbf{RO1.1.O}) & Spoken varieties differ by village; forcing a single dialect alienates speakers~\cite{bitjaakody2001basaa, sadembouo1984systematique}. & \textbf{Challenge $C_4$} (Dialect Continua) & Village Glossary Microservice and UI Dialect Switch Toggle (Addresses \textbf{RO1.2.T}, \textbf{RO1.3.I}). \\
 \addlinespace
-& & Theory (\textbf{RO2.2.T}) & Unstructured field audio causes demographic skew and data leakage; manual subtitling takes 10.8 min/min video~\cite{simons2020building}. & \textbf{Challenge $C_1$ \& $C_4$} (Speed and Accuracy) & 9-Parameter Ingestion API and Automated Frame-Level Speech Alignment. \\
+& & Observation (\textbf{RO1.1.O}) & Translators waste substantial effort searching external tables for special characters~\cite{tadadjeu1979alphabet}. & \textbf{Challenge $C_3$ \& $C_{10}$} (Typography \& Speed) & Diacritic-safe Unicode Font Stacks and Ergonomic Caption Interface (Addresses \textbf{RO1.3.I}). \\
+\addlinespace
+& & Observation (\textbf{RO1.1.O}) & Unstructured field audio causes demographic skew and train-test data leakage~\cite{gauthier2016collecting}. & \textbf{Challenge $C_5$ \& $C_6$} (Field Recording \& Governance) & Offline KoboToolbox Ingestion API, 9-Parameter Rule, and Speaker Registry (Addresses \textbf{RO2.2.T}). \\
+\addlinespace
+& & Observation (\textbf{RO1.1.O}) & Independent linguistic verification prevents dialect errors from corrupting training data. & \textbf{Challenge $C_7$} (Quality Validation) & Two-Tier Validation State Machine and Consent Tracking Ledger (Addresses \textbf{RO2.2.T}). \\
+\midrule
+\multirow{4}{*}{\textbf{RQ2}} & \multirow{4}{*}{\textbf{PS1}} & Observation (\textbf{RO2.1.O}) & Baseline foundation models lack GACL diacritics and pitch features; sub-words split accents~\cite{radford2023robust}. & \textbf{Challenge $C_1$ \& $C_2$} (Pitch \& Tokenization) & Character-level CTC Fine-Tuning with GACL Atomic Vocabulary and NFC (Addresses \textbf{RO2.3.I}). \\
+\addlinespace
+& & Observation (\textbf{RO2.1.O}) & Translating into Bantu languages causes 30\%--50\% text expansion, spilling across video scene cuts~\cite{essono2000ewondo}. & \textbf{Challenge $C_8$} (Text Expansion) & Automated Subtitle Re-segmentation and Expansion Alert Indicators (Addresses \textbf{RO2.3.I}). \\
+\addlinespace
+& & Observation (\textbf{RO2.1.O}) & Traditional server-side audio processing introduces lag; unassisted manual alignment takes $\sim$10 min/min video~\cite{w3c2021webaudio}. & \textbf{Challenge $C_9$} (Waveform Visualization) & Browser Web Audio API Waveform Engine with Automated Boundary Snapping (Addresses \textbf{RO2.3.I}). \\
+\addlinespace
+& & Observation (\textbf{RO2.1.O}) & Translator fatigue causes high error rates; usability scores must exceed global averages~\cite{brooke1996sus, hart1988nasa}. & \textbf{Challenge $C_{10}$} (Usability \& Throughput) & Accelerated Subtitling Pipeline ($<$3.5 min/min video, SUS $>80$) (Addresses \textbf{RO2.4.E}). \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -381,12 +522,64 @@ Table~\ref{tab:traceability_mapping} provides an explicit, bidirectional traceab
 \subsection{Chapter Summary}
 \label{sec:chap2_summary}
 
-This chapter executed the Observation phase of our research by examining 41 peer-reviewed studies and testing existing software on Cameroonian languages. The investigation answered all nine review questions and identified the exact reasons why current speech models and video editors fail: they ignore voice pitch, break accent marks, ignore village dialects, and take far too long to use manually.
+This chapter carried out the Observation phase of our research by examining 41 primary peer-reviewed studies and benchmarking existing speech recognition and video editing tools on Cameroonian languages. The investigation answered all nine review questions and identified the key reasons why existing systems fail: they filter out voice pitch, fragment stacked accent marks, ignore regional village dialects, lack offline field collection tools, and require exhausting manual alignment effort.
 
-By organizing these findings and defining four clear challenges ($C_1$--$C_4$), we have established the defensible research foundation for the Kingdom Communication Solutions (KCS) Media Studio. Chapter~3 will convert these four challenges into a complete, component-level system design: presenting our software architecture, database entity schemas, and user interface workflows.
+By translating these empirical findings into \textbf{ten practical system challenges ($C_1$--$C_{10}$)}, we have established a solid foundation for the Kingdom Communication Solutions (KCS) Media Studio. Chapter~3 will convert these ten challenges into a concrete, component-level system design: presenting our modular microservice architecture, database entity schemas, and responsive user interface workflows.
 
-\newpage
+\FloatBarrier
+\clearpage
+\onecolumn
+
 \appendix
+
+\section*{Appendix: Systematic Literature Review Appraisal Table}
+\addcontentsline{toc}{section}{Appendix: Systematic Literature Review Appraisal Table}
+
+Table~\ref{tab:slr_appraisal} presents the quality appraisal of representative primary studies retained under our PRISMA methodology, documenting empirical evidence types, corresponding review questions, and quality ratings.
+
+\begin{table}[ht]
+\centering
+\small
+\setlength{\tabcolsep}{4.5pt}
+\caption{Systematic Literature Review Appraisal: Representative Included Studies}
+\label{tab:slr_appraisal}
+\begin{tabular}{p{2.8cm} p{3.6cm} p{3.0cm} p{1.6cm} >{\raggedright\arraybackslash}p{5.4cm}}
+\toprule
+\textbf{Citation} & \textbf{Evidence Focus} & \textbf{Research Methodology} & \textbf{Review Question} & \textbf{Quality Appraisal / Empirical Rating} \\
+\midrule
+Pratap et al. (2024)~\cite{pratap2024scaling} & Massively Multilingual Speech (MMS 1,400+) & Neural self-supervised acoustic modeling & $\text{RQ}_{\text{Rev}}1$ & \textbf{High}: Large-scale empirical validation; verified checkpoint availability. \\
+\addlinespace
+Radford et al. (2023)~\cite{radford2023robust} & Robust Speech Recognition via Large-Scale Weak Supervision & Sequence-to-sequence Transformer evaluation & $\text{RQ}_{\text{Rev}}1$ & \textbf{High}: Authoritative 680k-hour benchmark; documents non-coverage of African idioms. \\
+\addlinespace
+Olatunji et al. (2023)~\cite{olatunji2023afrispeech} & AfriSpeech-200 Accented African Speech Corpus & Multi-accent clinical speech recognition & $\text{RQ}_{\text{Rev}}1$, $\text{RQ}_{\text{Rev}}5$ & \textbf{High}: Verifiable Pan-African dataset; peer-reviewed evaluation protocols. \\
+\addlinespace
+Conneau et al. (2023)~\cite{conneau2023fleurs} & FLEURS Multilingual Speech Benchmark & Few-shot cross-lingual representation testing & $\text{RQ}_{\text{Rev}}1$ & \textbf{High}: Rigorous 102-language baseline for self-supervised evaluation. \\
+\addlinespace
+Gauthier et al. (2016)~\cite{gauthier2016collecting} & Low-Resource Speech Corpus Collection & Empirical field recording in Wolof & $\text{RQ}_{\text{Rev}}5$, $\text{RQ}_{\text{Rev}}6$ & \textbf{High}: Documents speaker leakage risks and field validation workflows. \\
+\addlinespace
+Bird et al. (2014)~\cite{bird2014aikuma} & Aikuma Mobile Language Documentation App & Field mobile recording in rural regions & $\text{RQ}_{\text{Rev}}5$ & \textbf{High}: Validated offline mobile acquisition architecture and usability. \\
+\addlinespace
+Wittenburg et al. (2006)~\cite{wittenburg2006elan} & ELAN Multimodal Linguistic Annotation & Professional tier annotation architecture & $\text{RQ}_{\text{Rev}}7$ & \textbf{High}: Industry standard for time-aligned linguistic audio transcription. \\
+\addlinespace
+Doumbouya et al. (2021)~\cite{doumbouya2021using} & Radio Broadcasts for Low-Resource ASR & Field acquisition and crowdsourcing & $\text{RQ}_{\text{Rev}}5$ & \textbf{High}: Peer-reviewed AAAI study on acoustic collection in West Africa. \\
+\addlinespace
+Gebru et al. (2021)~\cite{gebru2021datasheets} & Datasheets for Datasets & Dataset governance and ethical audits & $\text{RQ}_{\text{Rev}}6$ & \textbf{High}: Standardized framework for corpus transparency and consent documentation. \\
+\addlinespace
+Tadadjeu \& Sadembouo (1979)~\cite{tadadjeu1979alphabet} & General Alphabet of Cameroonian Languages & National standard phonetic orthography & $\text{RQ}_{\text{Rev}}3$ & \textbf{High}: Foundational national standard for all Cameroonian language writing. \\
+\addlinespace
+Essono (2000)~\cite{essono2000ewondo} & Phonology, Morphology, and Syntax of Ewondo & Linguistic grammatical treatise & $\text{RQ}_{\text{Rev}}2$, $\text{RQ}_{\text{Rev}}4$ & \textbf{High}: Authoritative linguistic reference grammar for the Ewondo language. \\
+\addlinespace
+Lemb \& de Gastines (1973)~\cite{lemb1973dictionnaire} & Dictionnaire Basaa-Fran\c{c}ais & Lexicographical reference grammar & $\text{RQ}_{\text{Rev}}2$, $\text{RQ}_{\text{Rev}}4$ & \textbf{High}: Standard reference dictionary for Basaa tonology and vocabulary. \\
+\addlinespace
+Sadembouo (1984)~\cite{sadembouo1984systematique} & Dialectology and Communication in Bamileke & Sociolinguistic dialect survey & $\text{RQ}_{\text{Rev}}2$, $\text{RQ}_{\text{Rev}}4$ & \textbf{High}: Authoritative classification of Gh\textopeno m\'al\'a' regional varieties. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\FloatBarrier
+\clearpage
+\twocolumn
+
 \nocite{*}
 \printbibliography[heading=bibintoc]
 
