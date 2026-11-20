@@ -922,7 +922,7 @@ To validate the system architecture empirically prior to production deployment, 
 \paragraph{Controlled Evaluation Protocol for Chapter 5.}
 The experimental protocol recruits 15 fluent native speakers (5 for Ewondo, 5 for Gh\textopeno m\'al\'a', 5 for Basaa) spanning professional translators, educators, and community creators. Participants complete counterbalanced subtitling trials: Task A uses standard commercial software (Premiere Pro / Subtitle Edit), while Task B uses KCS Media Studio on standardized 5-minute educational video clips. Total task completion time, character correction edit counts, NASA-TLX subjective cognitive workload ratings, and SUS survey scores are logged and analyzed using paired two-tailed $t$-tests and ANOVA ($\alpha = 0.05$).
 
-\section{Implementation Roadmap (Systems Development Phase)}
+\subsection{Implementation Roadmap (Systems Development Phase)}
 \label{sec:implementation}
 
 The planned \textbf{Systems Development phase} of the Nunamaker SDIS framework translates the architectural models of Section~\ref{sec:design} into functional software:
@@ -933,7 +933,7 @@ The planned \textbf{Systems Development phase} of the Nunamaker SDIS framework t
     \item \textbf{Field Ingestion Worker (KoboToolbox Ingestion API):} Implementing automated polling workers to ingest mobile field recordings, validate 9-parameter filenames, isolate PII into the Speaker Registry, and manage two-tier validation queues.
 \end{enumerate}
 
-\section{Conclusion and Future Outlook}
+\section*{Conclusion and Future Outlook}
 \label{sec:conclusion}
 
 This cumulative research paper has established the foundational scientific and architectural blueprint for the \textbf{Kingdom Communication Solutions (KCS) Media Studio}. By systematically synthesizing our preliminary exploratory diagnostic audit (which revealed a $100\%$ WER failure on Whisper and severe typographic clipping in 4 out of 5 commercial editors), a PRISMA-guided Systematic Literature Review across 41 primary peer-reviewed studies, and a formal Theory Building architectural elaboration, this research provides a comprehensive solution to the computational deficits facing low-resource Cameroonian tonal languages (Gh\textopeno m\'al\'a', Ewondo, and Basaa).
