@@ -132,9 +132,9 @@ $\text{RQ}_{\text{Rev}}3$, $\text{RQ}_{\text{Rev}}7$ & GACL Diacritics \& Video 
 \addlinespace
 $\text{RQ}_{\text{Rev}}4$ & Regional Village Dialect Continua & \textbf{RO1.1.O} (Observation) & Sociolinguistic audit of lexical variation and translator usability barriers. \\
 \addlinespace
-$\text{RQ}_{\text{Rev}}5$, $\text{RQ}_{\text{Rev}}6$ & Field Collection \& Governance & \textbf{RO1.1.O} (Observation) & Offline mobile data collection, 9-parameter audio nomenclature, and train-test leakage control. \\
+$\text{RQ}_{\text{Rev}}5$, $\text{RQ}_{\text{Rev}}6$ & Field Collection \& Governance & \textbf{RO1.1.O} (Motivating \textbf{RO2.2.T}) & Field audio collection barriers, speaker train-test leakage risks, and data governance protocols. \\
 \addlinespace
-$\text{RQ}_{\text{Rev}}8$, $\text{RQ}_{\text{Rev}}9$ & Bantu Expansion \& Usability & \textbf{RO2.1.O} (Observation) & Morphological expansion timing drift, browser Web Audio latency, and productivity benchmarking. \\
+$\text{RQ}_{\text{Rev}}8$, $\text{RQ}_{\text{Rev}}9$ & Bantu Expansion \& Usability & \textbf{RO2.1.O} (Motivating \textbf{RO2.4.E}) & Morphological expansion timing drift, browser Web Audio latency, and productivity benchmarking. \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -228,9 +228,9 @@ Despite rapid global adoption, commercial cloud speech platforms overlook Camero
 \end{itemize}
 
 \paragraph{Methodological Baseline and Hypotheses for Chapter 5.}
-Rather than assuming unverified baseline metrics prior to experimental testing, we formulate our performance expectations as testable research hypotheses to be empirically benchmarked in Chapter~5:
+Grounded in the exploratory diagnostic audit reported in Chapter~1 (where zero-shot Whisper yielded 100\% WER and unadapted zero-shot MMS yielded 74.2\%--86.5\% WER), we formulate our downstream performance expectations as testable research hypotheses to be empirically benchmarked in the controlled experimental trials of Chapter~5:
 \begin{itemize}
-    \item \textbf{Hypothesis $H_1$ (ASR Baseline Error and CTC Adaptation):} We hypothesize that evaluating off-the-shelf MMS on conversational Cameroonian video dialogue will yield a baseline Word Error Rate exceeding 75\%, with tone confusion and diacritic omission representing the dominant error categories. Downstream fine-tuning with character-level CTC using a dedicated GACL vocabulary is hypothesized to reduce Word Error Rate below 35\% and Character Error Rate below 15\%.
+    \item \textbf{Hypothesis $H_1$ (ASR Baseline Error and CTC Adaptation):} Evaluating unadapted zero-shot MMS on conversational Cameroonian video speech yields a baseline Word Error Rate exceeding 75\%, with tone confusion and diacritic omission representing the dominant error categories. We hypothesize that downstream fine-tuning with character-level CTC on our double-validated corpus using a dedicated GACL atomic character vocabulary will reduce Word Error Rate below 35\% and Character Error Rate below 15\%.
 \end{itemize}
 
 \subsubsection{Architectural Causes of Model Failure on Cameroonian Speech}
@@ -321,7 +321,7 @@ Field enumerators use Android smartphones running custom KoboToolbox forms. The 
 
 \subsubsection{The 9-Parameter File Nomenclature and Speaker Leakage Prevention}
 \label{sec:chap2_naming_rule}
-Arbitrary file naming causes metadata loss and file overwrites. To guarantee full machine-actionable indexing, every audio file follows the strict \textbf{nine-parameter naming convention} established in Assignment~1:
+Arbitrary file naming causes metadata loss and file overwrites. To guarantee full machine-actionable indexing, every audio file follows the strict \textbf{nine-parameter naming convention} established in our foundational data governance specification (Chapter~0 and Chapter~3):
 \begin{center}
 \texttt{ISO-Lang\_Variant\_Demographics\_Content\_Environment\_Location\_Timestamp\_ConceptID\_UID.wav}
 \end{center}
@@ -358,7 +358,7 @@ Subtitles make audiovisual content accessible to students, hard-of-hearing audie
 
 \subsubsection{The Manual Subtitling Productivity Bottleneck}
 \label{sec:chap2_bottleneck}
-Because existing editing suites offer zero automated transcription or dialect-specific input support for Cameroonian languages, video subtitling is currently performed entirely by hand. Translators must repeatedly switch between video players and word processors, search external character tables to copy-paste stacked diacritics, and manually align subtitle boundaries against video frames. Professional audiovisual subtitling guidelines and preliminary translator interviews indicate that manual transcription, translation, and block-by-block synchronization for unassisted low-resource speech typically imposes a heavy overhead of approximately 10 to 12 minutes of labor per minute of finished video dialogue. The vast majority of this overhead is absorbed by character map lookups, correcting clipped font renderings, and manually nudging misaligned caption blocks.
+Because existing editing suites offer zero automated transcription or dialect-specific input support for Cameroonian languages, video subtitling is currently performed entirely by hand. Translators must repeatedly switch between video players and word processors, search external character tables to copy-paste stacked diacritics, and manually align subtitle boundaries against video frames. Corroborating the preliminary diagnostic audit measured in Chapter~1 (where a 5-minute video required 54 minutes, or 10.8 min/min video), professional audiovisual subtitling guidelines and translator interviews confirm that unassisted manual subtitling in indigenous languages typically imposes an overhead of 10 to 12 minutes of labor per minute of finished video dialogue. The vast majority of this overhead is absorbed by character map lookups, correcting clipped font renderings, and manually nudging misaligned caption blocks.
 
 \subsubsection{Browser Waveforms and Automated Boundary Snapping}
 \label{sec:chap2_snapping}

@@ -108,31 +108,31 @@ The overall goal of this research is to design, develop, and empirically evaluat
 \subsection{Empirical Analysis and Problem Statements}
 \label{sec:chap1_problem_statements}
 
-To ensure our problem statements are grounded in verifiable facts rather than assumptions, we conducted an empirical diagnostic audit before designing the system.
+To ensure our problem statements are grounded in verifiable facts rather than assumptions, we conducted a \textbf{preliminary exploratory diagnostic audit} across commercial speech systems and subtitle editors prior to designing our platform. (The systematic literature review and theoretical gap analysis are conducted in Chapter~2, while the complete experimental evaluation of our adapted platform is reported in Chapter~5).
 
-\subsubsection{Diagnostic Analysis of Existing Tools}
-Our audit examined three areas:
+\subsubsection{Preliminary Diagnostic Analysis of Existing Tools}
+Our exploratory audit examined three key areas:
 \begin{enumerate}
-    \item \textbf{Speech Recognition Engine Benchmark:} We evaluated state-of-the-art ASR models on test recordings of Gh\textopeno m\'al\'a', Ewondo, and Basaa:
+    \item \textbf{Speech Recognition Engine Benchmark:} We evaluated state-of-the-art ASR models on diagnostic test recordings of Gh\textopeno m\'al\'a', Ewondo, and Basaa:
     \begin{itemize}
         \item \textit{OpenAI Whisper (Large-v3)}~\cite{radford2023robust}: Achieved a \textbf{100\% Word Error Rate} (complete failure). Because the model lacks language identifiers for these idioms, it either hallucinated random characters or remained completely silent.
-        \item \textit{Meta MMS Baseline (Zero-Shot)}~\cite{pratap2024scaling}: Achieved a Word Error Rate of \textbf{74.2\% on Ewondo}, \textbf{86.5\% on Gh\textopeno m\'al\'a'}, and \textbf{81.3\% on Basaa}. Over 70\% of recognition errors were caused by tone confusion (e.g., misclassifying high pitch as low pitch) and tokenizer failure on combining diacritics.
+        \item \textit{Meta MMS Baseline (Zero-Shot)}~\cite{pratap2024scaling}: Achieved an unadapted zero-shot Word Error Rate of \textbf{74.2\% on Ewondo}, \textbf{86.5\% on Gh\textopeno m\'al\'a'}, and \textbf{81.3\% on Basaa}. Over 70\% of recognition errors were caused by tone confusion (e.g., misclassifying high pitch as low pitch) and tokenizer failure on combining diacritics.
         \item \textit{Commercial APIs (Google Cloud, Azure)}: Offer zero support for any of Cameroon's 281 indigenous languages.
     \end{itemize}
     \item \textbf{Subtitle Editor and Font Audit:} We audited five major tools: Adobe Premiere Pro (2024), DaVinci Resolve, YouTube Studio, Subtitle Edit (v4.0), and Aegisub. When typing GACL text with stacked combining diacritics (e.g., open-o with acute accent \textopeno\textsuperscript{\textasciiacute{}} or schwa with grave \textschwa\textsuperscript{\textasciigrave{}}), \textbf{4 out of 5 tools suffered from severe glyph clipping, overlapping characters, or cursor positioning errors}. None of the tools provided dialect-switching or localized glossary features.
-    \item \textbf{Manual Subtitling Workflow Timing:} We measured the time required for a fluent native translator to manually transcribe and subtitle a 5-minute video in Ewondo and Gh\textopeno m\'al\'a' using standard software. The task required an average of \textbf{54 minutes of intense manual labor}—a time ratio of \textbf{10.8 minutes of work per 1 minute of video}. This large overhead was caused by manually looking up and copy-pasting special characters and repeatedly adjusting misaligned subtitle blocks.
+    \item \textbf{Manual Subtitling Workflow Timing:} We measured the time required for a fluent native translator to manually transcribe and subtitle a 5-minute video in Ewondo and Gh\textopeno m\'al\'a' using standard software. The task required an average of \textbf{54 minutes of intense manual labor}—a baseline time ratio of \textbf{10.8 minutes of work per 1 minute of video}. This large overhead was caused by manually looking up and copy-pasting special characters and repeatedly adjusting misaligned subtitle blocks.
 \end{enumerate}
 
-Table~\ref{tab:comparison} presents a verifiable comparative matrix contrasting existing software suites against our engineered KCS Media Studio platform.
+Table~\ref{tab:comparison} presents a verifiable comparative matrix contrasting existing software suites against our targeted KCS Media Studio platform specifications.
 
 \begin{table*}[t]
 \centering
 \small
-\caption{Verifiable Feature Comparison: Existing Video Subtitling Suites vs. KCS Media Studio}
+\caption{Verifiable Feature Comparison: Existing Video Subtitling Suites vs. KCS Media Studio (Target Specifications)}
 \label{tab:comparison}
 \begin{tabular}{p{3.2cm} p{2.2cm} p{2.2cm} p{2.2cm} p{2.2cm} p{3.0cm}}
 \toprule
-\textbf{Feature / Capability} & \textbf{Premiere Pro} & \textbf{YouTube Studio} & \textbf{Subtitle Edit} & \textbf{Whisper API} & \textbf{KCS Media Studio} \\
+\textbf{Feature / Capability} & \textbf{Premiere Pro} & \textbf{YouTube Studio} & \textbf{Subtitle Edit} & \textbf{Whisper API} & \textbf{KCS Media Studio (Target)} \\
 \midrule
 \textbf{Cameroonian ASR} & No (0 languages) & No (0 languages) & No & No (100\% WER) & \textbf{Yes} (Ewondo, Gh\textopeno m\'al\'a', Basaa) \\
 \addlinespace
@@ -144,10 +144,11 @@ Table~\ref{tab:comparison} presents a verifiable comparative matrix contrasting 
 \addlinespace
 \textbf{Mobile Fieldwork Sync} & None & None & None & None & \textbf{Yes} (KoboToolbox 9-param API) \\
 \addlinespace
-\textbf{Subtitling Time Ratio} & 10.8 min / min video & 10.8 min / min video & 10.8 min / min video & N/A (Failed) & \textbf{$<$3.5 min / min video} ($>$65\% faster) \\
+\textbf{Subtitling Time Ratio} & 10.8 min / min video & 10.8 min / min video & 10.8 min / min video & N/A (Failed) & \textbf{$<$3.5 min / min video}\footnotemark \\
 \bottomrule
 \end{tabular}
 \end{table*}
+\footnotetext{Target performance hypothesis ($>65\%$ efficiency improvement) to be experimentally validated in Chapter~5.}
 
 \subsubsection{Formulation of the Problem Statements}
 Based on these empirical findings, we formalize the core research challenges into two distinct Problem Statements (\textbf{PS1} and \textbf{PS2}):
@@ -278,44 +279,47 @@ Table~\ref{tab:methodology_mapping} maps each Research Question, Problem Stateme
 \subsection{Approach Section}
 \label{sec:chap1_approach}
 
-Our research follows a disciplined five-phase execution lifecycle:
+Our research follows a disciplined five-phase execution lifecycle that bridges the theoretical and empirical quadrants of the Nunamaker SDIS framework:
 
-\paragraph{Phase 1: Gathering Field Recordings with Informed Consent.}
+\paragraph{Phase 1: Gathering Field Recordings with Informed Consent (Observation \& Theory Building).}
 We conduct targeted field trips to the linguistic heartlands of our three languages: Centre Region for Ewondo, West Region for Gh\textopeno m\'al\'a', and Littoral Region for Basaa. Using mobile phones equipped with KoboToolbox~\cite{kobotoolbox2024}, we record a balanced sample of 45 native speakers (15 per language, balanced across three age groups and 50\% male/female) reading our standardized 363-word diagnostic lexicon, yielding 16,335 targeted audio tokens. Documented informed consent is secured prior to recording, ensuring full participant autonomy~\cite{grenoble2010language}.
 
-\paragraph{Phase 2: Independent Double-Validation Protocol.}
+\paragraph{Phase 2: Independent Double-Validation Protocol (Theory Building \& Governance).}
 All collected data undergoes a multi-tiered validation workflow~\cite{bird2014coscab}. As Bird et al.~\cite{bird2014coscab} show, \textit{"independent verification by a second native speaker is essential to catch subtle pronunciation and translation errors before data is used in machine learning."} A primary technical audit filters out background noise, while an independent second native speaker validates pronunciation and spelling against standard dictionaries. Disagreements are adjudicated by a senior linguistic supervisor.
 
-\paragraph{Phase 3: Teaching the Speech Recognition Models.}
+\paragraph{Phase 3: Teaching the Speech Recognition Models (Systems Development).}
 Audio recordings are indexed using our standardized 9-parameter naming convention (encoding language, variant, demographics, content, environment, location, timestamp, concept ID, and UID). We then fine-tune Meta MMS and XLS-R models using Connectionist Temporal Classification (CTC) loss~\cite{graves2006connectionist}, incorporating custom character vocabularies that map GACL tonal diacritics.
 
-\paragraph{Phase 4: Building the Web Video Editor.}
+\paragraph{Phase 4: Building the Web Video Editor (Systems Development).}
 The KCS Media Studio is built as a cloud-native web application using React, the Web Audio API, HTML5 Canvas, and FastAPI. Users can upload a video, inspect the synchronized waveform, receive automated draft subtitles in Ewondo, Gh\textopeno m\'al\'a', or Basaa, and drag subtitle blocks to match speech boundaries. Custom Unicode font stacks ensure all GACL characters display without distortion.
 
-\paragraph{Phase 5: Testing with Real Users.}
-The platform is evaluated with real Cameroonian translators. We measure speech recognition accuracy (WER, CER), task completion time (targeting under 3.5 minutes of work per minute of video), and subjective user satisfaction via the System Usability Scale (SUS)~\cite{brooke1996sus}.
+\paragraph{Phase 5: Testing with Real Users (Evaluation Phase).}
+The platform is evaluated with real Cameroonian translators. We measure speech recognition accuracy (WER, CER), task completion time (targeting under 3.5 minutes of work per minute of video), and subjective user satisfaction via the System Usability Scale (SUS)~\cite{brooke1996sus} and NASA-TLX workload metrics.
 
 \subsection{Outline Section}
 \label{sec:chap1_outline}
 
-The remainder of this document is organized into five subsequent chapters:
+This document forms part of a cohesive multi-chapter engineering report organized as follows:
 \begin{itemize}
-    \item \textbf{Chapter 2: State of the Art.} Reviews prior research on speech recognition for African languages, audits existing subtitle tools, and examines the history of Cameroonian linguistic corpora.
-    \item \textbf{Chapter 3: System Design and Architecture.} Details the technical architecture of KCS Media Studio, the 9-parameter audio metadata protocol, and database entity models.
-    \item \textbf{Chapter 4: Implementation and Proof-of-Concept.} Explains the engineering implementation: browser waveform rendering, GACL font management, and the containerized FastAPI backend.
-    \item \textbf{Chapter 5: Evaluation and Results.} Reports quantitative ASR benchmarks (WER, CER), timing comparisons, and qualitative usability ratings.
-    \item \textbf{Chapter 6: Conclusion and Future Work.} Summarizes findings, discusses prototype limitations, and outlines future expansions toward automated speech synthesis.
+    \item \textbf{Chapter 0: Project Charter and Foundational Blueprint.} Documents the foundational project charter, dialect selection rationales, KoboToolbox offline collection protocols, and expected project artefacts.
+    \item \textbf{Chapter 1: Introduction and Research Formulation.} Formulates the problem statements, motivation statements, research questions, Nunamaker SDIS framework, and research objectives (the present chapter).
+    \item \textbf{Chapter 2: State of the Art (Observation Phase).} Delivers a PRISMA-guided Systematic Literature Review across 41 primary studies and software audits, answering 9 review questions and identifying 10 practical system challenges.
+    \item \textbf{Chapter 3: System Design and Architecture (Theory Building Phase).} Formulates the component-level software architecture, decoupled village glossary microservices, 9-parameter audio metadata protocol, and database entity models.
+    \item \textbf{Chapter 4: Implementation and Proof-of-Concept (Systems Development Phase).} Explains the full-stack engineering implementation: browser Web Audio waveform scrubbing, GACL font fallback engine, and containerized FastAPI/CTC backend.
+    \item \textbf{Chapter 5: Evaluation and Results (Evaluation Phase).} Reports controlled quantitative ASR benchmarks (WER, CER), timeline synchronization accuracy, subtitling throughput speed trials, and NASA-TLX/SUS usability ratings.
+    \item \textbf{Chapter 6: Conclusion and Future Work.} Summarizes core scientific contributions, discusses prototype limitations, and outlines future expansions toward automated text-to-speech synthesis.
 \end{itemize}
 
 \subsection{Structure of Chapter 2 (State of the Art)}
 \label{sec:chap1_structure_chapter2}
 
-To establish a solid academic foundation, Chapter~2 is organized into three thematic parts:
+To establish a solid, reproducible academic foundation, Chapter~2 executes the \textbf{Observation Phase} through a PRISMA-guided Systematic Literature Review (SLR) covering 41 primary peer-reviewed studies and empirical software benchmarks. Chapter~2 investigates nine specific Review Questions ($\text{RQ}_{\text{Rev}}1$--$\text{RQ}_{\text{Rev}}9$) structured into three overarching thematic areas:
 \begin{enumerate}
-    \item \textbf{Part 1: Speech Recognition for African Tonal Languages.} Reviews the evolution of ASR architectures and explains why global models struggle with African pitch tones and diacritical marks.
-    \item \textbf{Part 2: Web Video Subtitle Tools and Their Limits.} Analyzes commercial and open-source subtitle tools, highlighting their lack of support for GACL characters and dialectal variation.
-    \item \textbf{Part 3: The State of Cameroonian Language Resources.} Reviews the 1979 GACL framework and documents the acute gap between physical print dictionaries and digital speech corpora.
+    \item \textbf{Thematic Area 1: Speech Foundation Models and Tonal Pitch Modeling ($\text{RQ}_{\text{Rev}}1, \text{RQ}_{\text{Rev}}2$):} Reviews self-supervised foundation architectures (wav2vec~2.0, MMS, Whisper) and analyzes their fundamental failure modes on African pitch tones, combining diacritics, and sub-word tokenization fragmentation.
+    \item \textbf{Thematic Area 2: Cameroonian Orthography, Font Typography, and Subtitle Suites ($\text{RQ}_{\text{Rev}}3, \text{RQ}_{\text{Rev}}4, \text{RQ}_{\text{Rev}}7$):} Audits the 1979 GACL writing system, diagnoses vertical glyph-clipping in commercial editors (Premiere, DaVinci, YouTube Studio), and investigates regional village dialect continua across Ewondo, Gh\textopeno m\'al\'a', and Basaa.
+    \item \textbf{Thematic Area 3: Field Acquisition Governance, Bantu Text Expansion, and Usability ($\text{RQ}_{\text{Rev}}5, \text{RQ}_{\text{Rev}}6, \text{RQ}_{\text{Rev}}8, \text{RQ}_{\text{Rev}}9$):} Audits offline mobile audio collection via KoboToolbox, 9-parameter audio metadata and speaker leakage controls, timeline desynchronization caused by 30\%--50\% Bantu morphological text expansion, browser Web Audio waveforms, and objective productivity benchmarks.
 \end{enumerate}
+Chapter~2 synthesizes these findings into ten concrete practical system challenges ($C_1$--$C_{10}$) that directly drive the architectural specifications for Chapter~3.
 
 \newpage
 \appendix
